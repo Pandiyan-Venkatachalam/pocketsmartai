@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}PocketSmart AI — Smart Budget & Recommendation Assistant{% endblock %}</title>
-    <link rel="stylesheet" href="/static/css/style.css?v=4.1">
+    <link rel="stylesheet" href="/static/css/style.css?v=4.2">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <script>
@@ -215,13 +215,13 @@
 
     <!-- Mobile topbar (visible only on small screens) -->
     <div class="mobile-topbar">
-        <button class="hamburger-btn" onclick="openSidebar(event)" type="button">
+        <button class="hamburger-btn" onclick="toggleSidebar(null, event)" title="Toggle menu" aria-label="Toggle menu" type="button">
             ☰
         </button>
-        <div class="brand-logo" style="font-size: 1.1rem;">
-            <div class="brand-icon" style="width: 28px; height: 28px; font-size: 0.8rem;">⚡</div>
+        <a href="/" class="brand-logo" title="PocketSmart AI">
+            <div class="brand-icon">⚡</div>
             <div class="brand-text">PocketSmart<span>.AI</span></div>
-        </div>
+        </a>
     </div>
 
     <!-- ============================================================
