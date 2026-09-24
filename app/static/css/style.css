@@ -1500,6 +1500,257 @@ textarea.form-control { min-height: 90px; resize: vertical; }
 }
 
 
+
+/* ================================================================
+   LIGHT MODE — COMPREHENSIVE OVERRIDES (all dark cards/tables)
+   ================================================================ */
+
+/* ── Body ambient gradient ── */
+[data-theme="light"] body {
+  background-image: none;
+  background-color: #f8fafc;
+}
+
+/* ── All card variants ── */
+[data-theme="light"] .card,
+[data-theme="light"] .stat-card,
+[data-theme="light"] .feature-card,
+[data-theme="light"] .planner-card,
+[data-theme="light"] .plan-card-sm,
+[data-theme="light"] .rec-item-card,
+[data-theme="light"] .budget-summary-banner,
+[data-theme="light"] .domain-breakdown-card,
+[data-theme="light"] .domain-plan-container .card,
+[data-theme="light"] .history-table-container {
+  background: #ffffff !important;
+  border-color: #e2e8f0 !important;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06) !important;
+}
+
+/* ── Feature card uses gradient — flatten in light mode ── */
+[data-theme="light"] .feature-card {
+  background: #ffffff !important;
+}
+
+/* ── Planner card ── */
+[data-theme="light"] .planner-card {
+  background: #ffffff !important;
+}
+
+/* ── AI note box ── */
+[data-theme="light"] .ai-note-box {
+  background: rgba(249, 115, 22, 0.05) !important;
+  border-left-color: #f97316 !important;
+  color: #7c2d12 !important;
+}
+
+/* ── Plan tip items ── */
+[data-theme="light"] .rec-tip-item {
+  background: rgba(249, 115, 22, 0.05) !important;
+  border-color: rgba(249, 115, 22, 0.2) !important;
+}
+
+[data-theme="light"] .rec-tip-item.alt {
+  background: #f8fafc !important;
+  border-color: #e2e8f0 !important;
+}
+
+[data-theme="light"] .rec-tip-item strong {
+  color: #0f172a !important;
+}
+
+[data-theme="light"] .rec-tip-item p {
+  color: #475569 !important;
+}
+
+/* ── Budget summary banner ── */
+[data-theme="light"] .budget-summary-banner {
+  background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%) !important;
+}
+
+/* ── Plan-card header text ── */
+[data-theme="light"] .plan-card-header {
+  color: #0f172a !important;
+  border-bottom-color: #e2e8f0 !important;
+}
+
+/* ── Plan list items ── */
+[data-theme="light"] .plan-list li {
+  color: #334155 !important;
+  border-bottom-color: #f1f5f9 !important;
+}
+
+[data-theme="light"] .plan-list li span { color: #64748b !important; }
+[data-theme="light"] .plan-list li strong { color: #0f172a !important; }
+
+/* ── Bullet lists ── */
+[data-theme="light"] .bullet-list li { color: #475569 !important; }
+
+/* ── Tables ── */
+[data-theme="light"] .table,
+[data-theme="light"] .plan-table {
+  color: #0f172a !important;
+  background: #ffffff !important;
+}
+
+[data-theme="light"] .table th,
+[data-theme="light"] .plan-table th {
+  background: #f1f5f9 !important;
+  color: #334155 !important;
+  border-bottom-color: #e2e8f0 !important;
+}
+
+[data-theme="light"] .table td,
+[data-theme="light"] .plan-table td {
+  color: #475569 !important;
+  border-bottom-color: #f1f5f9 !important;
+  background: #ffffff !important;
+}
+
+[data-theme="light"] .table tr:hover td {
+  background: #f8fafc !important;
+}
+
+[data-theme="light"] .history-table-container {
+  background: #ffffff !important;
+}
+
+/* ── Badges & status pills ── */
+[data-theme="light"] .planner-badge {
+  font-weight: 600 !important;
+}
+
+[data-theme="light"] .badge-home    { background: rgba(249,115,22,0.08) !important; color: #c2410c !important; border-color: rgba(249,115,22,0.25) !important; }
+[data-theme="light"] .badge-party   { background: rgba(236,72,153,0.08) !important; color: #9d174d !important; border-color: rgba(236,72,153,0.25) !important; }
+[data-theme="light"] .badge-jewelry { background: rgba(168,85,247,0.08) !important; color: #6b21a8 !important; border-color: rgba(168,85,247,0.25) !important; }
+[data-theme="light"] .badge-custom  { background: rgba(249,115,22,0.08) !important; color: #c2410c !important; border-color: rgba(236,72,153,0.25) !important; }
+
+/* ── Status indicators ── */
+[data-theme="light"] .status-ok   { background: rgba(16,185,129,0.1) !important; color: #065f46 !important; }
+[data-theme="light"] .status-warn { background: rgba(239,68,68,0.08) !important; color: #991b1b !important; }
+
+/* ── Platform pills ── */
+[data-theme="light"] .platform-pill {
+  background: #f1f5f9 !important;
+  color: #334155 !important;
+}
+
+/* ── Recommendation item card image ── */
+[data-theme="light"] .rec-card-image {
+  background: #f1f5f9 !important;
+  border-bottom-color: #e2e8f0 !important;
+}
+
+/* ── Rec card body text ── */
+[data-theme="light"] .rec-card-body {
+  background: #ffffff !important;
+  color: #0f172a !important;
+}
+
+[data-theme="light"] .rec-item-title { color: #0f172a !important; }
+[data-theme="light"] .rec-item-reason { color: #64748b !important; }
+[data-theme="light"] .rec-item-price { color: #ea580c !important; }
+[data-theme="light"] .rec-card-tags { color: #64748b !important; }
+
+/* ── Page section labels & nav ── */
+[data-theme="light"] .sidebar-section-label {
+  color: #94a3b8 !important;
+  letter-spacing: 0.05em !important;
+}
+
+/* ── Budget metrics ── */
+[data-theme="light"] .budget-metric .label { color: #64748b !important; }
+[data-theme="light"] .budget-metric .value { color: #0f172a !important; font-weight: 700 !important; }
+[data-theme="light"] .budget-metric .value.indigo  { color: #4f46e5 !important; }
+[data-theme="light"] .budget-metric .value.emerald { color: #059669 !important; }
+[data-theme="light"] .budget-metric .value.cyan    { color: #0284c7 !important; }
+
+/* ── Progress bar track ── */
+[data-theme="light"] .budget-progress-track {
+  background: #e2e8f0 !important;
+  border: none !important;
+}
+
+/* ── Footer ── */
+[data-theme="light"] .footer {
+  background: #ffffff !important;
+  border-top-color: #e2e8f0 !important;
+}
+
+/* ── Overlay (login form background etc.) ── */
+[data-theme="light"] .sidebar-user {
+  background: #f8fafc !important;
+  border-radius: 8px !important;
+  padding: 0.5rem !important;
+}
+
+/* ── Input range slider ── */
+[data-theme="light"] input[type=range]::-webkit-slider-runnable-track {
+  background: #e2e8f0 !important;
+}
+
+/* ── General text color catchall ── */
+[data-theme="light"] h1, [data-theme="light"] h2,
+[data-theme="light"] h3, [data-theme="light"] h4,
+[data-theme="light"] h5, [data-theme="light"] h6 {
+  color: #0f172a !important;
+}
+
+[data-theme="light"] p { color: #334155; }
+[data-theme="light"] span { color: inherit; }
+[data-theme="light"] strong { color: #0f172a; }
+
+/* ── Dashboard stat text ── */
+[data-theme="light"] .stat-value { color: #0f172a !important; }
+[data-theme="light"] .stat-label { color: #64748b !important; }
+[data-theme="light"] .stat-icon {
+  background: rgba(249, 115, 22, 0.08) !important;
+}
+
+/* ── Plan grid ── */
+[data-theme="light"] .plan-grid-2 .card { background: #ffffff !important; }
+
+/* ── Feasibility box ── */
+[data-theme="light"] .feasibility-status {
+  color: #065f46 !important;
+  background: rgba(16,185,129,0.08) !important;
+}
+
+/* ── Button primary keeps orange, outline adapts ── */
+[data-theme="light"] .btn-primary { background: #f97316 !important; color: #ffffff !important; }
+[data-theme="light"] .btn-outline { color: #374151 !important; border-color: #d1d5db !important; background: #ffffff !important; }
+[data-theme="light"] .btn-outline:hover { background: #f3f4f6 !important; }
+
+/* ── History table action buttons ── */
+[data-theme="light"] .delete-history-btn {
+  color: #ef4444 !important;
+  background: transparent !important;
+}
+
+/* ── Clickable card hover ── */
+[data-theme="light"] .clickable-card:hover {
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.1) !important;
+  border-color: rgba(249,115,22,0.35) !important;
+}
+
+/* ── Mobile topbar & hamburger ── */
+[data-theme="light"] .hamburger-btn { color: #334155 !important; }
+[data-theme="light"] .hamburger-btn:hover { background: #f1f5f9 !important; }
+
+/* ── Sidebar footer ── */
+[data-theme="light"] .sidebar-footer {
+  border-top-color: #e2e8f0 !important;
+}
+
+/* ── Sidebar user avatar ── */
+[data-theme="light"] .sidebar-user-avatar {
+  background: linear-gradient(135deg, #f97316, #ec4899) !important;
+  color: #ffffff !important;
+}
+
+[data-theme="light"] .sidebar-user-name  { color: #0f172a !important; }
+[data-theme="light"] .sidebar-user-email { color: #64748b !important; }
+
 /* ──────────────────────────────────────────────
    GLOBAL THEME TOGGLE — Fixed top-right corner
    ────────────────────────────────────────────── */
