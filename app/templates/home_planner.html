@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+
+{% block title %}Home Interior Planner — PocketSmart AI{% endblock %}
+
+{% block content %}
+<div>
+    <div style="margin-bottom: 2rem; text-align: center;">
+        <span class="planner-badge badge-home">Home Interior Planner</span>
+        <h1 style="font-size: 2.3rem; margin-top: 0.5rem; margin-bottom: 0.5rem;">Furnish Your Dream Space</h1>
+        <!-- <p style="color: var(--text-muted); font-size: 1rem;">
+            Provide your room dimensions, style, and budget. Gemini will curate coordinated furniture & decor from IKEA, Amazon, and Pepperfry without breaking your budget.
+        </p> -->
+    </div>
+
+    <div class="card">
+        <form id="home-planner-form">
+            <!-- Budget & Room -->
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="total_budget" class="form-label">Total Budget (₹ INR) <span class="required">*</span></label>
+                    <input type="number" id="total_budget" class="form-control" placeholder="e.g. 80000" min="1000" step="500" required>
+                </div>
+                <div class="form-group">
+                    <label for="room_type" class="form-label">Room Type <span class="required">*</span></label>
+                    <select id="room_type" class="form-control" required>
+                        <option value="Living Room" selected>Living Room</option>
+                        <option value="Master Bedroom">Master Bedroom</option>
+                        <option value="Dining Room">Dining Room</option>
+                        <option value="Home Office">Home Office</option>
+                        <option value="Balcony / Outdoor">Balcony / Outdoor</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Style Preference -->
+            <div class="form-group">
+                <label for="style" class="form-label">Interior Design Style <span class="required">*</span></label>
+                <select id="style" class="form-control" required>
+                    <option value="Modern" selected>Modern — Clean lines, geometric shapes, neutral base</option>
+                    <option value="Scandinavian">Scandinavian — Warm wood, airy whites, minimalist beauty</option>
+                    <option value="Minimalist">Minimalist — Uncluttered, purposeful essentials</option>
+                    <option value="Contemporary">Contemporary — Sleek silhouettes, plush comfort</option>
+                    <option value="Bohemian">Bohemian — Textured natural fibers, layered charm</option>
+                    <option value="Traditional">Traditional — Classic solid Sheesham wood finishes</option>
+                </select>
+            </div>
+
+            <!-- Required Furniture & Quantities -->
+            <div class="form-group">
+                <label class="form-label">Select Furniture Items Needed</label>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.75rem; background: rgba(0,0,0,0.2); padding: 1rem; border-radius: var(--radius-sm); border: 1px solid var(--border-subtle);">
+                    <label style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.9rem;">
+                        <input type="checkbox" class="home-item-checkbox" value="Sofa" checked> 
+                        <span>3-Seater Sofa</span>
+                        <input type="number" id="qty_sofa" value="1" min="1" max="5" style="width: 45px; margin-left: auto; padding: 2px 4px; background: #1f2937; border: 1px solid #374151; color: white; border-radius: 4px;">
+                    </label>
+
+                    <label style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.9rem;">
+                        <input type="checkbox" class="home-item-checkbox" value="Ceiling Fan" checked> 
+                        <span>Ceiling Fan</span>
+                        <input type="number" id="qty_ceiling_fan" value="1" min="1" max="5" style="width: 45px; margin-left: auto; padding: 2px 4px; background: #1f2937; border: 1px solid #374151; color: white; border-radius: 4px;">
+                    </label>
+
+                    <label style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.9rem;">
+                        <input type="checkbox" class="home-item-checkbox" value="Lights" checked> 
+                        <span>Pendant / Ambient Lights</span>
+                        <input type="number" id="qty_lights" value="2" min="1" max="10" style="width: 45px; margin-left: auto; padding: 2px 4px; background: #1f2937; border: 1px solid #374151; color: white; border-radius: 4px;">
+                    </label>
+
+                    <label style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.9rem;">
+                        <input type="checkbox" class="home-item-checkbox" value="Dining Table" checked> 
+                        <span>Dining Table</span>
+                        <input type="number" id="qty_dining_table" value="1" min="1" max="3" style="width: 45px; margin-left: auto; padding: 2px 4px; background: #1f2937; border: 1px solid #374151; color: white; border-radius: 4px;">
+                    </label>
+
+                    <label style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.9rem;">
+                        <input type="checkbox" class="home-item-checkbox" value="TV Unit"> 
+                        <span>Floating TV Unit</span>
+                        <input type="number" id="qty_tv_unit" value="1" min="1" max="2" style="width: 45px; margin-left: auto; padding: 2px 4px; background: #1f2937; border: 1px solid #374151; color: white; border-radius: 4px;">
+                    </label>
+
+                    <label style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.9rem;">
+                        <input type="checkbox" class="home-item-checkbox" value="Chairs"> 
+                        <span>Accent Armchair</span>
+                        <input type="number" id="qty_chairs" value="1" min="1" max="4" style="width: 45px; margin-left: auto; padding: 2px 4px; background: #1f2937; border: 1px solid #374151; color: white; border-radius: 4px;">
+                    </label>
+
+                    <label style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.9rem;">
+                        <input type="checkbox" class="home-item-checkbox" value="Decor"> 
+                        <span>Wall Art & Rugs</span>
+                        <input type="number" id="qty_decor" value="1" min="1" max="5" style="width: 45px; margin-left: auto; padding: 2px 4px; background: #1f2937; border: 1px solid #374151; color: white; border-radius: 4px;">
+                    </label>
+                </div>
+            </div>
+
+            <!-- Additional Preferences -->
+            <div class="form-group">
+                <label for="additional_preferences" class="form-label">Additional Preferences & Notes</label>
+                <textarea id="additional_preferences" class="form-control" placeholder="e.g. Warm lighting, walnut wood finish"></textarea>
+            </div>
+
+            <div style="margin-top: 2rem;">
+                <button type="submit" class="btn btn-primary btn-lg btn-block">
+                    ⚡ Generate Budget Interior Recommendations
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="/static/js/planners.js"></script>
+{% endblock %}

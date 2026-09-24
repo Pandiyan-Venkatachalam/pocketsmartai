@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+
+{% block title %}Jewelry Budget Planner — PocketSmart AI{% endblock %}
+
+{% block content %}
+<div>
+    <div style="margin-bottom: 2rem; text-align: center;">
+        <span class="planner-badge badge-jewelry">AI Fashion & Jewelry Stylist</span>
+        <h1 style="font-size: 2.3rem; margin-top: 0.5rem; margin-bottom: 0.5rem;">Match Your Jewelry to Your Outfit</h1>
+        <!-- <p style="color: var(--text-muted); font-size: 1rem;">
+            Upload an outfit photo or enter your style preferences. Gemini Multimodal Vision evaluates color harmony, necklines, and style aesthetics to recommend verified pieces from GIVA, Tanishq, and Amazon.
+        </p> -->
+    </div>
+
+    <div class="card">
+        <form id="jewelry-planner-form">
+            <!-- Budget & Occasion -->
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="budget" class="form-label">Total Budget (₹ INR) <span class="required">*</span></label>
+                    <input type="number" id="budget" class="form-control" placeholder="e.g. 15000" min="500" step="500" required>
+                </div>
+                <div class="form-group">
+                    <label for="occasion" class="form-label">Occasion <span class="required">*</span></label>
+                    <select id="occasion" class="form-control" required>
+                        <option value="Wedding / Reception" selected>Wedding / Reception</option>
+                        <option value="Cocktail Evening / Party">Cocktail Evening / Party</option>
+                        <option value="Festive / Diwali">Festive / Diwali</option>
+                        <option value="Daily Office / Minimalist Workwear">Daily Office / Minimalist Workwear</option>
+                        <option value="Date Night / Dinner">Date Night / Dinner</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Style & Metal Preference -->
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="preferred_style" class="form-label">Aesthetic Style <span class="required">*</span></label>
+                    <select id="preferred_style" class="form-control" required>
+                        <option value="Ethnic/Traditional" selected>Ethnic & Royal Traditional (Kundan, Polki, Temple)</option>
+                        <option value="Minimalist">Minimalist Pure 925 Silver (Solitaire, Dainty)</option>
+                        <option value="Modern Luxury">Modern Luxury (14kt Yellow Gold, Diamond Accents)</option>
+                        <option value="Contemporary">Contemporary Chic (Tarnish-free, Geometric Hoops)</option>
+                        <option value="Bohemian">Bohemian & Layered (Pearls, Coins)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="color_preference" class="form-label">Color / Metal Tone</label>
+                    <select id="color_preference" class="form-control">
+                        <option value="Yellow Gold Tone" selected>Yellow Gold Tone</option>
+                        <option value="Rhodium Silver">Rhodium Silver</option>
+                        <option value="Rose Gold">Rose Gold</option>
+                        <option value="Emerald Green & Gold Accents">Emerald Green & Gold Accents</option>
+                        <option value="Pearl White & Gold">Pearl White & Gold</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Jewelry Types Needed -->
+            <div class="form-group">
+                <label class="form-label">Jewelry Pieces Desired</label>
+                <div style="display: flex; flex-wrap: wrap; gap: 1rem; background: rgba(0,0,0,0.2); padding: 0.85rem 1rem; border-radius: var(--radius-sm); border: 1px solid var(--border-subtle);">
+                    <label style="display: flex; align-items: center; gap: 0.4rem; font-size: 0.9rem;">
+                        <input type="checkbox" class="jewelry-type-checkbox" value="Earrings" checked> Earrings
+                    </label>
+                    <label style="display: flex; align-items: center; gap: 0.4rem; font-size: 0.9rem;">
+                        <input type="checkbox" class="jewelry-type-checkbox" value="Necklace" checked> Necklace / Choker
+                    </label>
+                    <label style="display: flex; align-items: center; gap: 0.4rem; font-size: 0.9rem;">
+                        <input type="checkbox" class="jewelry-type-checkbox" value="Bracelet" checked> Bracelet / Bangles
+                    </label>
+                    <label style="display: flex; align-items: center; gap: 0.4rem; font-size: 0.9rem;">
+                        <input type="checkbox" class="jewelry-type-checkbox" value="Rings" checked> Rings
+                    </label>
+                </div>
+            </div>
+
+            <!-- Optional Outfit Photo Upload (Gemini Multimodal) -->
+            <div class="form-group">
+                <label class="form-label">
+                    Optional: Upload Outfit Photo 
+                    <span style="font-size: 0.78rem; color: var(--primary-light); font-weight: normal; margin-left: 0.5rem;">
+                        (Gemini Multimodal Vision will inspect color palette & neckline)
+                    </span>
+                </label>
+
+                <input type="file" id="outfit_image" accept="image/png, image/jpeg, image/webp" style="display: none;">
+
+                <div id="image-dropzone" class="image-dropzone">
+                    <div style="font-size: 2rem; margin-bottom: 0.5rem;">📷</div>
+                    <p style="font-weight: 600; font-size: 0.95rem; margin-bottom: 0.25rem;">
+                        Click or drag & drop your outfit photo here
+                    </p>
+                    <p style="color: var(--text-dim); font-size: 0.8rem;">
+                        Supports JPG, PNG, WEBP (Up to 5MB)
+                    </p>
+                </div>
+
+                <div id="image-preview-box" class="image-preview-box" style="display: none;">
+                    <img id="preview-img" src="" alt="Outfit Preview">
+                    <button type="button" id="remove-img-btn" class="remove-btn" title="Remove image">✕</button>
+                    <div style="margin-top: 0.5rem; font-size: 0.8rem; color: #34d399;">
+                        ✓ Outfit loaded for Gemini Vision analysis
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top: 2rem;">
+                <button type="submit" class="btn btn-primary btn-lg btn-block">
+                    💎 Match Jewelry with Gemini Stylist
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="/static/js/planners.js"></script>
+{% endblock %}

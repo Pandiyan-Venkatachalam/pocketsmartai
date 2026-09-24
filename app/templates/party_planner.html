@@ -1,0 +1,127 @@
+{% extends "base.html" %}
+
+{% block title %}Party Budget Planner — PocketSmart AI{% endblock %}
+
+{% block content %}
+<div>
+    <div style="margin-bottom: 2rem; text-align: center;">
+        <span class="planner-badge badge-party">Party & Event Planner</span>
+        <h1 style="font-size: 2.4rem; margin-top: 0.5rem; margin-bottom: 0.5rem; font-weight: 800;">Plan Your Celebration Your Way</h1>
+        <!-- <p style="color: var(--text-muted); font-size: 1.05rem;">
+            Select from quick suggestions or type your exact custom wishes. Gemini balances your budget across Catering, Venues, Decor, and Entertainment.
+        </p> -->
+    </div>
+
+    <div class="card" style="border: 1px solid var(--border-subtle); background: var(--bg-surface);">
+        <form id="party-planner-form">
+            <!-- Budget & Guest Count -->
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="budget" class="form-label">
+                        Total Budget (₹ INR) <span class="required">*</span>
+                    </label>
+                    <input type="number" id="budget" class="form-control" placeholder="e.g. 50000" min="2000" step="500" required>
+                </div>
+                <div class="form-group">
+                    <label for="guest_count" class="form-label">
+                        Number of Guests <span class="required">*</span>
+                    </label>
+                    <input type="number" id="guest_count" class="form-control" placeholder="e.g. 25" min="1" max="500" required>
+                </div>
+            </div>
+
+            <!-- Location & Date -->
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="location" class="form-label">Location / Neighborhood</label>
+                    <input type="text" id="location" class="form-control" placeholder="e.g. Indiranagar, Bengaluru">
+                </div>
+                <div class="form-group">
+                    <label for="event_date" class="form-label">Event Date / Timing</label>
+                    <input type="text" id="event_date" class="form-control" placeholder="e.g. Saturday evening">
+                </div>
+            </div>
+
+            <!-- Event Type: Dropdown + Custom Type Input -->
+            <div class="form-group">
+                <label for="event_type" class="form-label">
+                    Event Type & Theme <span class="required">*</span>
+                </label>
+                <select id="event_type" class="form-control" style="margin-bottom: 0.5rem;">
+                    <option value="Birthday Party" selected>🎂 Birthday Party</option>
+                    <option value="Anniversary Celebration">🥂 Anniversary Celebration</option>
+                    <option value="Corporate Mixer / Team Outing">💼 Corporate Mixer / Team Outing</option>
+                    <option value="Housewarming Party">🏡 Housewarming Party</option>
+                    <option value="Cocktail Evening">🍸 Cocktail Evening</option>
+                    <option value="Festive Family Gathering">✨ Festive Family Gathering</option>
+                    <option value="Custom">✍️ Custom Theme (Type below)</option>
+                </select>
+                <input type="text" id="custom_event_type" class="form-control" placeholder="e.g. 90s Retro Night, Rooftop BBQ">
+            </div>
+
+            <!-- Food Preferences: Dropdown + Custom Type Input -->
+            <div class="form-group">
+                <label for="food_preferences" class="form-label">
+                    Food & Catering Style
+                </label>
+                <select id="food_preferences" class="form-control" style="margin-bottom: 0.5rem;">
+                    <option value="3-Course Gourmet Buffet (Swiggy/Zomato)" selected>🍛 3-Course Gourmet Buffet (Swiggy / Zomato)</option>
+                    <option value="Live Barbecue & Kebab Station">🍢 Live Barbecue & Kebab Station</option>
+                    <option value="Budget Hi-Tea & Snack Platter Boxes">🥪 Budget Hi-Tea & Snack Platter Boxes</option>
+                    <option value="Cocktail Finger Foods, Sliders & Dips">🍔 Cocktail Finger Foods, Sliders & Dips</option>
+                    <option value="Custom">✍️ Custom Menu (Type below)</option>
+                </select>
+                <input type="text" id="custom_food" class="form-control" placeholder="e.g. Live Pizza, Chaat counter">
+            </div>
+
+            <!-- Decoration: Dropdown + Custom Type Input -->
+            <div class="form-group">
+                <label for="decoration_preferences" class="form-label">
+                    Decoration & Ambience
+                </label>
+                <select id="decoration_preferences" class="form-control" style="margin-bottom: 0.5rem;">
+                    <option value="Festive Balloon Garland & Neon Backdrop" selected>🎈 Festive Balloon Garland & Neon Backdrop</option>
+                    <option value="Fresh Floral & Fairy String Light Centerpieces">🌸 Fresh Floral & Fairy String Light Centerpieces</option>
+                    <option value="Eco-friendly Paper Lanterns & Bunting">🌿 Eco-friendly Paper Lanterns & Bunting</option>
+                    <option value="Minimalist Warm Fairy Lights Only">✨ Minimalist Warm Fairy Lights Only</option>
+                    <option value="Custom">✍️ Custom Decor (Type below)</option>
+                </select>
+                <input type="text" id="custom_decor" class="form-control" placeholder="e.g. Neon backdrop, Fairy lights">
+            </div>
+
+            <!-- Entertainment: Dropdown + Custom Type Input -->
+            <div class="form-group">
+                <label for="entertainment_preferences" class="form-label">
+                    Entertainment & Activities
+                </label>
+                <select id="entertainment_preferences" class="form-control" style="margin-bottom: 0.5rem;">
+                    <option value="Professional DJ with High-Power Sound Setup" selected>🎧 Professional DJ with High-Power Sound Setup</option>
+                    <option value="Live Acoustic Guitar Duo">🎸 Live Acoustic Guitar Duo</option>
+                    <option value="Interactive Photo Booth with Instant Prints">📸 Interactive Photo Booth with Instant Prints</option>
+                    <option value="Curated Bluetooth Party Playlist & Mood Lights">🎵 Curated Bluetooth Party Playlist & Mood Lights</option>
+                    <option value="Custom">✍️ Custom Entertainment (Type below)</option>
+                </select>
+                <input type="text" id="custom_entertainment" class="form-control" placeholder="e.g. DJ, Karaoke, Photo booth">
+            </div>
+
+            <!-- Additional Custom Wishes -->
+            <div class="form-group">
+                <label for="additional_party_wishes" class="form-label">
+                    Any Additional Wishes or Special Constraints
+                </label>
+                <textarea id="additional_party_wishes" class="form-control" placeholder="e.g. Outdoor patio, veg counter, quiet after 10 PM"></textarea>
+            </div>
+
+            <div style="margin-top: 2rem;">
+                <button type="submit" class="btn btn-primary btn-lg btn-block" style="font-size: 1.05rem;">
+                    🎉 Generate My Custom Party Plan with Gemini
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="/static/js/planners.js"></script>
+{% endblock %}

@@ -1,0 +1,265 @@
+{% extends "base.html" %}
+
+{% block title %}Recommendation Plan #{{ recommendation.id }} — PocketSmart AI{% endblock %}
+
+{% block content %}
+
+<!-- Page Header -->
+<div style="margin-bottom: 1.25rem; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 0.75rem;">
+    <div>
+        <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.35rem; flex-wrap: wrap;">
+            {% if recommendation.planner_type == 'home' %}
+            <span class="planner-badge badge-home">Home Interior Plan</span>
+            {% elif recommendation.planner_type == 'party' %}
+            <span class="planner-badge badge-party">Party Budget Plan</span>
+            {% elif recommendation.planner_type == 'jewelry' %}
+            <span class="planner-badge badge-jewelry">Jewelry Styling Plan</span>
+            {% else %}
+            <span class="planner-badge badge-custom">Custom Budget Plan</span>
+            {% endif %}
+            {% if recommendation.is_mock_ai %}
+            <span style="font-size: 0.72rem; background: rgba(255,255,255,0.06); color: var(--text-muted); padding: 0.18rem 0.5rem; border-radius: 4px;">Demo Mode</span>
+            {% else %}
+            <span style="font-size: 0.72rem; background: rgba(16,185,129,0.15); color: #6ee7b7; padding: 0.18rem 0.5rem; border-radius: 4px; font-weight: 600;">✓ Gemini AI</span>
+            {% endif %}
+        </div>
+        <h1 style="font-size: 1.6rem; margin-bottom: 0.15rem;">{{ recommendation.summary or 'Budget Plan' }}</h1>
+        <p style="color: var(--text-muted); font-size: 0.82rem;">{{ recommendation.created_at.strftime('%d %b %Y, %I:%M %p') }}</p>
+    </div>
+    <div style="display: flex; gap: 0.5rem;">
+        <a href="/history" class="btn btn-outline btn-sm">← History</a>
+        <button onclick="window.print()" class="btn btn-secondary btn-sm">🖨️ PDF</button>
+    </div>
+</div>
+
+<!-- Budget Banner — compact 4-col strip -->
+<div class="budget-summary-banner">
+    <div class="budget-stats-row">
+        <div class="budget-metric">
+            <div class="label">Budget</div>
+            <div class="value indigo">₹{{ "{:,.0f}".format(recommendation.budget) }}</div>
+        </div>
+        <div class="budget-metric">
+            <div class="label">Estimated Cost</div>
+            <div class="value emerald">₹{{ "{:,.0f}".format(recommendation.total_estimated_cost) }}</div>
+        </div>
+        <div class="budget-metric">
+            <div class="label">Reserve</div>
+            <div class="value cyan">₹{{ "{:,.0f}".format(recommendation.remaining_budget) }}</div>
+        </div>
+        <div class="budget-metric">
+            <div class="label">Utilization</div>
+            <div class="value" style="color:#fff;">
+                {% if recommendation.budget > 0 %}
+                {{ "{:.1f}%".format((recommendation.total_estimated_cost / recommendation.budget) * 100) }}
+                {% else %}0%{% endif %}
+            </div>
+        </div>
+    </div>
+    <div class="budget-progress-track">
+        <div class="budget-progress-bar" style="width: {% if recommendation.budget > 0 %}{{ [(recommendation.total_estimated_cost / recommendation.budget) * 100, 100]|min }}{% else %}0{% endif %}%;"></div>
+    </div>
+</div>
+
+<!-- AI Notes -->
+{% if recommendation.ai_notes %}
+<div class="ai-note-box" style="margin-bottom: 1.25rem;">
+    <strong>💡 AI Strategy:</strong>
+    <span style="color: var(--text-muted); font-size: 0.88rem;">{{ recommendation.ai_notes }}</span>
+</div>
+{% endif %}
+
+<!-- ============================================================
+     DOMAIN PLAN (non-GENERAL)
+============================================================ -->
+{% if plan_data and plan_data.domain and plan_data.domain != 'GENERAL' %}
+
+<!-- Row 1: Feasibility + Cost Breakdown side by side -->
+<div class="plan-grid-2">
+    {% if plan_data.feasibility %}
+    <div class="card plan-card-sm">
+        <div class="plan-card-header">🏗️ Feasibility</div>
+        <div class="feasibility-status {{ 'status-ok' if plan_data.feasibility.status != 'LOW_BUDGET' else 'status-warn' }}">
+            {{ plan_data.feasibility.status.replace('_', ' ') }}
+        </div>
+        {% if plan_data.feasibility.details %}
+        <ul class="plan-list">
+            {% for key, val in plan_data.feasibility.details.items() %}
+            <li>
+                <span>{{ key|replace('estimated','')|replace('BuiltUpArea','Built-Up Area')|title }}</span>
+                {% if val is mapping %}
+                <strong>{{ val.min }} – {{ val.max }} {{ val.unit }}</strong>
+                {% else %}
+                <strong>{{ val }}</strong>
+                {% endif %}
+            </li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </div>
+    {% endif %}
+
+    {% if plan_data.cost_breakdown %}
+    <div class="card plan-card-sm">
+        <div class="plan-card-header">💰 Cost Breakdown</div>
+        <ul class="plan-list">
+            {% for item in plan_data.cost_breakdown %}
+            <li>
+                <span>{{ item.category }}</span>
+                <strong>₹{{ "{:,.0f}".format(item.cost) }}</strong>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+</div>
+
+<!-- Materials table -->
+{% if plan_data.materials %}
+<div class="card plan-card-sm" style="margin-bottom: 1.25rem; overflow-x: auto;">
+    <div class="plan-card-header">📦 Estimated Requirements</div>
+    <table class="plan-table">
+        <thead>
+            <tr>
+                <th>Resource / Material</th>
+                <th>Qty</th>
+                <th>Cost (₹)</th>
+                <th>Source</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for mat in plan_data.materials %}
+            <tr>
+                <td style="font-weight:500; color: var(--text-pure);">{{ mat.name }}</td>
+                <td>{{ mat.estimated_quantity }}</td>
+                <td>₹{{ "{:,.0f}".format(mat.cost_estimate) }}</td>
+                <td style="font-size: 0.8rem; color: var(--text-dim);">{{ mat.source }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endif %}
+
+<!-- Row 2: Assumptions + Risks -->
+{% if plan_data.assumptions or plan_data.risks %}
+<div class="plan-grid-2" style="margin-bottom: 1.25rem;">
+    {% if plan_data.assumptions %}
+    <div class="card plan-card-sm" style="border-left: 3px solid var(--primary);">
+        <div class="plan-card-header">⚠️ Assumptions</div>
+        <ul class="bullet-list">
+            {% for a in plan_data.assumptions %}
+            <li>{{ a }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+    {% if plan_data.risks %}
+    <div class="card plan-card-sm" style="border-left: 3px solid #ef4444;">
+        <div class="plan-card-header">🚨 Risks & Exclusions</div>
+        <ul class="bullet-list">
+            {% for r in plan_data.risks %}
+            <li>{{ r }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+</div>
+{% endif %}
+
+<!-- Strategic Recommendations -->
+{% if plan_data.recommendations %}
+<div class="card plan-card-sm" style="margin-bottom: 1.25rem;">
+    <div class="plan-card-header">💡 Strategic Recommendations</div>
+    <div class="rec-tips-grid">
+        {% for rec in plan_data.recommendations %}
+        <div class="rec-tip-item">
+            <strong>{{ rec.title }}</strong>
+            <p>{{ rec.reason }}</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+
+<!-- Alternative Plans -->
+{% if plan_data.alternative_plans %}
+<div class="card plan-card-sm" style="margin-bottom: 1.25rem;">
+    <div class="plan-card-header">🔄 Alternative Plans</div>
+    <div class="rec-tips-grid">
+        {% for alt in plan_data.alternative_plans %}
+        <div class="rec-tip-item alt">
+            <strong>{{ alt.name }}</strong>
+            <p>{{ alt.description }}</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+
+{% endif %}
+{# END domain plan #}
+
+<!-- ============================================================
+     E-COMMERCE / GENERAL items
+============================================================ -->
+{% set valid_items = [] %}
+{% if items %}
+    {% for item in items %}
+        {% if item.platform != 'Business model allocation' and 'Initial Equipment' not in item.name and 'Initial Inventory' not in item.name %}
+            {% set _ = valid_items.append(item) %}
+        {% endif %}
+    {% endfor %}
+{% endif %}
+
+{% if valid_items|length > 0 %}
+<div style="margin-bottom: 1rem; display: flex; justify-content: space-between; align-items: center;">
+    <h3 style="font-size: 1.1rem;">Recommended Items ({{ valid_items|length }})</h3>
+    <span style="font-size: 0.82rem; color: var(--text-muted);">Verified catalog</span>
+</div>
+<div class="recommendations-grid">
+    {% for item in valid_items %}
+    <div class="rec-item-card clickable-card" data-href="{{ item.product_url }}" data-target="_blank" onclick="handleCardClick(event, '{{ item.product_url }}', '_blank')" title="View on {{ item.platform }} (opens in new tab)">
+        {% if item.image_url %}
+        <img src="{{ item.image_url }}" alt="{{ item.name }}" class="rec-card-image" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=500';">
+        {% else %}
+        <div class="rec-card-image" style="display:flex;align-items:center;justify-content:center;font-size:2rem;color:var(--text-dim);">📦</div>
+        {% endif %}
+        <div class="rec-card-body">
+            <div class="rec-card-tags">
+                <span style="font-size:0.75rem;font-weight:600;color:var(--primary-light);">{{ item.category }}</span>
+                <span class="platform-pill {{ item.platform.lower().replace(' ','') }}">{{ item.platform }}</span>
+            </div>
+            <h4 class="rec-item-title">{{ item.name }}</h4>
+            <div class="rec-item-price">₹{{ "{:,.0f}".format(item.estimated_price) }}</div>
+            <p class="rec-item-reason">{{ item.reason }}</p>
+            <a href="{{ item.product_url }}" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm btn-block" style="margin-top:auto;">
+                View on {{ item.platform }} ↗
+            </a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+<!-- Footer action card -->
+<div class="card" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;padding:1rem 1.25rem;">
+    <div>
+        <h4 style="font-size:1rem;margin-bottom:0.1rem;">Want to adjust parameters?</h4>
+        <p style="color:var(--text-muted);font-size:0.82rem;">Change budget or preferences to regenerate.</p>
+    </div>
+    <div style="display:flex;gap:0.5rem;">
+        {% if recommendation.planner_type == 'home' %}
+        <a href="/planners/home" class="btn btn-primary btn-sm">Edit Home Plan →</a>
+        {% elif recommendation.planner_type == 'party' %}
+        <a href="/planners/party" class="btn btn-primary btn-sm">Edit Party Plan →</a>
+        {% elif recommendation.planner_type == 'jewelry' %}
+        <a href="/planners/jewelry" class="btn btn-primary btn-sm">Edit Jewelry Plan →</a>
+        {% else %}
+        <a href="/planners/custom" class="btn btn-primary btn-sm">Edit Custom Plan →</a>
+        {% endif %}
+        <a href="/history" class="btn btn-outline btn-sm">← All Plans</a>
+    </div>
+</div>
+
+{% endblock %}

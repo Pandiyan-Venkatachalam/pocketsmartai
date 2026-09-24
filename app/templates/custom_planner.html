@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+
+{% block title %}Custom Budget Planner — PocketSmart AI{% endblock %}
+
+{% block content %}
+<div>
+    <div style="margin-bottom: 2rem; text-align: center;">
+        <span class="planner-badge" style="background: rgba(99, 102, 241, 0.15); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.3);">
+            ✨ Universal Budget Planner
+        </span>
+        <h1 style="font-size: 2.4rem; margin-top: 0.5rem; margin-bottom: 0.5rem; font-weight: 800;">
+            Create Any Custom Plan
+        </h1>
+        <!-- <p style="color: var(--text-muted); font-size: 1.05rem; max-width: 620px; margin: 0 auto;">
+            Not just Home or Jewelry! Plan travel vacations, developer workstations, home gyms, gaming setups, or any custom lifestyle goal with Gemini AI.
+        </p> -->
+    </div>
+
+    <div class="card" style="border: 1px solid var(--border-subtle); background: var(--bg-surface);">
+        <form id="custom-planner-form">
+            <!-- Plan Title & Budget -->
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="plan_title" class="form-label">
+                        Plan Title / Goal <span class="required">*</span>
+                    </label>
+                    <input type="text" id="plan_title" class="form-control" placeholder="e.g. Goa Trip, Desk Setup" required>
+                </div>
+                <div class="form-group">
+                    <label for="budget" class="form-label">
+                        Total Budget (₹ INR) <span class="required">*</span>
+                    </label>
+                    <input type="number" id="budget" class="form-control" placeholder="e.g. 50000" min="1000" step="500" required>
+                </div>
+            </div>
+
+            <!-- Domain / Category with Dropdown + Custom Field -->
+            <div class="form-group">
+                <label for="category_select" class="form-label">
+                    Category Domain <span class="required">*</span>
+                </label>
+                <select id="category_select" class="form-control">
+                    <option value="Travel & Vacation">✈️ Travel & Vacation</option>
+                    <option value="Tech & Workstation">💻 Tech & Workstation</option>
+                    <option value="Fitness & Home Gym">🏋️ Fitness & Home Gym</option>
+                    <option value="Gaming & Streaming">🎮 Gaming & Streaming</option>
+                    <option value="Photography & Filmmaking">📷 Photography & Media</option>
+                    <option value="Wedding & Bridal Shopping">💍 Wedding & Celebrations</option>
+                    <option value="Student / College Essentials">🎒 Student Living & Dorm</option>
+                    <option value="Custom">✨ Other / Custom Category...</option>
+                </select>
+            </div>
+
+            <!-- Custom Category Input (shown if Custom selected or typing) -->
+            <div id="custom-category-group" class="form-group" style="display: none;">
+                <label for="custom_category_input" class="form-label">
+                    Your Custom Domain Name
+                </label>
+                <input type="text" id="custom_category_input" class="form-control" placeholder="e.g. Baking, Terrace Garden">
+            </div>
+
+            <!-- Specific Target Items / Services -->
+            <div class="form-group">
+                <label for="target_items" class="form-label">
+                    Items or Services You Wish to Include
+                </label>
+                <input type="text" id="target_items" class="form-control" placeholder="e.g. Flights, Hotel, Scooty">
+                <span style="font-size: 0.8rem; color: var(--text-dim); display: block; margin-top: 0.35rem;">
+                    💡 Separate items with commas
+                </span>
+            </div>
+
+            <!-- Specific Preferences & Wishes -->
+            <div class="form-group">
+                <label for="preferences" class="form-label">
+                    Your Specific Wishes & Constraints
+                </label>
+                <textarea id="preferences" class="form-control" placeholder="e.g. Quiet stays, eco-friendly, 1-yr warranty"></textarea>
+            </div>
+
+            <div style="margin-top: 2rem;">
+                <button type="submit" class="btn btn-primary btn-lg btn-block" style="font-size: 1.05rem;">
+                    ⚡ Curate Custom Budget Recommendations with Gemini
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="/static/js/planners.js"></script>
+<script>
+    // Toggle custom category input based on dropdown selection
+    document.getElementById("category_select").addEventListener("change", function(e) {
+        const customGroup = document.getElementById("custom-category-group");
+        if (e.target.value === "Custom") {
+            customGroup.style.display = "block";
+            document.getElementById("custom_category_input").focus();
+        } else {
+            customGroup.style.display = "none";
+        }
+    });
+</script>
+{% endblock %}

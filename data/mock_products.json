@@ -1,0 +1,483 @@
+{
+  "home": [
+    {
+      "id": "h-sofa-01",
+      "name": "IKEA KIVIK 3-Seat Fabric Sofa (Anthracite)",
+      "category": "Sofa",
+      "style": "Modern",
+      "price": 34990,
+      "platform": "IKEA",
+      "url": "https://www.ikea.com/in/en/p/kivik-three-seat-sofa-tresund-anthracite-s39482838/",
+      "image_url": "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=500",
+      "description": "Deep seat cushion with pocket springs for comfortable seating."
+    },
+    {
+      "id": "h-sofa-02",
+      "name": "Amazon Brand - Solimo 3-Seater Leatherette Sofa (Brown)",
+      "category": "Sofa",
+      "style": "Contemporary",
+      "price": 18499,
+      "platform": "Amazon",
+      "url": "https://www.amazon.in/dp/B07ZNZJ4P3",
+      "image_url": "https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?w=500",
+      "description": "High density foam, durable fabric and solid wood frame."
+    },
+    {
+      "id": "h-sofa-03",
+      "name": "Wakefit Napper 3 Seater Sofa (Omega Blue)",
+      "category": "Sofa",
+      "style": "Minimalist",
+      "price": 14299,
+      "platform": "Flipkart",
+      "url": "https://www.flipkart.com/wakefit-napper-sofa",
+      "image_url": "https://images.unsplash.com/photo-1540574163026-643ea20ade25?w=500",
+      "description": "Ergonomically designed for lumbar support and cozy lounging."
+    },
+    {
+      "id": "h-sofa-04",
+      "name": "Royal Velvet Chesterfield 3-Seater Sofa (Emerald)",
+      "category": "Sofa",
+      "style": "Luxury",
+      "price": 48999,
+      "platform": "Pepperfry",
+      "url": "https://www.pepperfry.com/royal-chesterfield-sofa",
+      "image_url": "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=500",
+      "description": "Hand-tufted deep button detailing with premium velvet upholstery."
+    },
+    {
+      "id": "h-dining-01",
+      "name": "IKEA EKEDALEN Extendable Dining Table (Dark Brown)",
+      "category": "Dining Table",
+      "style": "Scandinavian",
+      "price": 21990,
+      "platform": "IKEA",
+      "url": "https://www.ikea.com/in/en/p/ekedalen-extendable-table-dark-brown-40340804/",
+      "image_url": "https://images.unsplash.com/photo-1615066390971-03e4e1c36ddf?w=500",
+      "description": "Seats 4 to 6 people with seamless extension leaf mechanism."
+    },
+    {
+      "id": "h-dining-02",
+      "name": "Solid Sheesham Wood 4-Seater Dining Set with Chairs",
+      "category": "Dining Table",
+      "style": "Traditional",
+      "price": 16999,
+      "platform": "Amazon",
+      "url": "https://www.amazon.in/dp/B08XYZ1234",
+      "image_url": "https://images.unsplash.com/photo-1530018607912-eff2daa1bac4?w=500",
+      "description": "Durable solid rosewood with honey finish and cushioned chairs."
+    },
+    {
+      "id": "h-dining-03",
+      "name": "Modern Round Glass Top 4-Seater Dining Table",
+      "category": "Dining Table",
+      "style": "Modern",
+      "price": 12499,
+      "platform": "Flipkart",
+      "url": "https://www.flipkart.com/glass-dining-table",
+      "image_url": "https://images.unsplash.com/photo-1577140917170-285929fb55b7?w=500",
+      "description": "Tempered glass surface with crossed metallic geometric legs."
+    },
+    {
+      "id": "h-fan-01",
+      "name": "Atomberg Renesa 1200mm BLDC Motor Ceiling Fan with Remote",
+      "category": "Ceiling Fan",
+      "style": "Modern",
+      "price": 3699,
+      "platform": "Amazon",
+      "url": "https://www.amazon.in/dp/B07R456DEF",
+      "image_url": "https://images.unsplash.com/photo-1598928506311-c55ded91a20c?w=500",
+      "description": "Super energy efficient 28W BLDC motor with LED speed indicator."
+    },
+    {
+      "id": "h-fan-02",
+      "name": "Havells Stealth Air 1200mm Silent Ceiling Fan",
+      "category": "Ceiling Fan",
+      "style": "Contemporary",
+      "price": 5499,
+      "platform": "Flipkart",
+      "url": "https://www.flipkart.com/havells-stealth-air",
+      "image_url": "https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=500",
+      "description": "Aerodynamic profile blades for whisper-quiet high air delivery."
+    },
+    {
+      "id": "h-fan-03",
+      "name": "Orient Electric Apex-FX 1200mm High Speed Ceiling Fan",
+      "category": "Ceiling Fan",
+      "style": "Basic",
+      "price": 1499,
+      "platform": "Amazon",
+      "url": "https://www.amazon.in/dp/B01N0PQRST",
+      "image_url": "https://images.unsplash.com/photo-1590725140246-20acceedcad8?w=500",
+      "description": "Reliable copper motor with ribbed blades for wide circulation."
+    },
+    {
+      "id": "h-light-01",
+      "name": "Philips Hue Smart LED Warm-to-Cool White Ceiling Pendant",
+      "category": "Lights",
+      "style": "Modern",
+      "price": 6999,
+      "platform": "Amazon",
+      "url": "https://www.amazon.in/dp/B08HUE1234",
+      "image_url": "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=500",
+      "description": "Dimmable smart lighting controllable via smartphone and voice."
+    },
+    {
+      "id": "h-light-02",
+      "name": "IKEA RANARP Pendant Lamp (Off-White/Gold)",
+      "category": "Lights",
+      "style": "Vintage",
+      "price": 2490,
+      "platform": "IKEA",
+      "url": "https://www.ikea.com/in/en/p/ranarp-pendant-lamp-off-white-80390974/",
+      "image_url": "https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?w=500",
+      "description": "Industrial retro charm with steel fittings and braided textile cord."
+    },
+    {
+      "id": "h-light-03",
+      "name": "Nordic Minimalist Arc Floor Standing Lamp",
+      "category": "Lights",
+      "style": "Minimalist",
+      "price": 3899,
+      "platform": "Pepperfry",
+      "url": "https://www.pepperfry.com/nordic-arc-floor-lamp",
+      "image_url": "https://images.unsplash.com/photo-1540932239986-30128078f3c5?w=500",
+      "description": "Sleek curved silhouette with marble base for accent corner lighting."
+    },
+    {
+      "id": "h-light-04",
+      "name": "Wipro 12W Warm White Recessed Ceiling COB Spotlights (Pack of 4)",
+      "category": "Lights",
+      "style": "Modern",
+      "price": 1899,
+      "platform": "Amazon",
+      "url": "https://www.amazon.in/dp/B07WIPRO45",
+      "image_url": "https://images.unsplash.com/photo-1524484485831-a92ffc0de03f?w=500",
+      "description": "Energy-efficient architectural spotlights with antiglare reflectors."
+    },
+    {
+      "id": "h-tv-01",
+      "name": "DeckUp Plank Engineered Wood Floating Wall Mounted TV Unit",
+      "category": "TV Unit",
+      "style": "Modern",
+      "price": 4299,
+      "platform": "Amazon",
+      "url": "https://www.amazon.in/dp/B07DEC0011",
+      "image_url": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=500",
+      "description": "Dark wenge finish, cable grommets, and spacious set-top box shelves."
+    },
+    {
+      "id": "h-tv-02",
+      "name": "IKEA BESTA TV Bench with Storage Drawers (White)",
+      "category": "TV Unit",
+      "style": "Scandinavian",
+      "price": 12990,
+      "platform": "IKEA",
+      "url": "https://www.ikea.com/in/en/p/besta-tv-bench-white-00474070/",
+      "image_url": "https://images.unsplash.com/photo-1595428774223-ef52624120d2?w=500",
+      "description": "Clean modular lines with push-to-open soft close drawers."
+    },
+    {
+      "id": "h-chair-01",
+      "name": "IKEA POÄNG Armchair with Cushion (Birch Veneer/Knisa Light Beige)",
+      "category": "Chairs",
+      "style": "Scandinavian",
+      "price": 6990,
+      "platform": "IKEA",
+      "url": "https://www.ikea.com/in/en/p/poaeng-armchair-birch-veneer-knisa-light-beige-s89305928/",
+      "image_url": "https://images.unsplash.com/photo-1580481077194-c7415444ffb3?w=500",
+      "description": "Layer-glued bent oak frame provides comfortable resilience."
+    },
+    {
+      "id": "h-chair-02",
+      "name": "Green Soul Monster Ergonomic Lounge & Accent Chair",
+      "category": "Chairs",
+      "style": "Modern",
+      "price": 8499,
+      "platform": "Amazon",
+      "url": "https://www.amazon.in/dp/B08GRE1122",
+      "image_url": "https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=500",
+      "description": "Breathable mesh back with adjustable lumbar and headrest."
+    },
+    {
+      "id": "h-table-01",
+      "name": "Urban Ladder Lyon Nesting Coffee Tables (Set of 2)",
+      "category": "Coffee Table",
+      "style": "Modern",
+      "price": 5499,
+      "platform": "Flipkart",
+      "url": "https://www.flipkart.com/urban-ladder-nesting-tables",
+      "image_url": "https://images.unsplash.com/photo-1533090161767-e6ffed986c88?w=500",
+      "description": "Space-saving nesting design with matte black iron legs."
+    },
+    {
+      "id": "h-decor-01",
+      "name": "Botanical Canvas Wall Art Frame (Set of 3)",
+      "category": "Decor",
+      "style": "Modern",
+      "price": 1899,
+      "platform": "Amazon",
+      "url": "https://www.amazon.in/dp/B09ART3344",
+      "image_url": "https://images.unsplash.com/photo-1582562124811-c09040d0a901?w=500",
+      "description": "High-definition gallery wrapped waterproof canvas prints."
+    },
+    {
+      "id": "h-decor-02",
+      "name": "Handmade Jute & Cotton Braided Floor Area Rug (4x6 ft)",
+      "category": "Decor",
+      "style": "Bohemian",
+      "price": 2799,
+      "platform": "Flipkart",
+      "url": "https://www.flipkart.com/jute-cotton-rug",
+      "image_url": "https://images.unsplash.com/photo-1600121848594-d8644e57abab?w=500",
+      "description": "Eco-friendly natural fiber rug bringing warm texture to living spaces."
+    },
+    {
+      "id": "h-decor-03",
+      "name": "Ceramic Abstract Geometric Vases Set with Artificial Pampas",
+      "category": "Decor",
+      "style": "Minimalist",
+      "price": 1299,
+      "platform": "Amazon",
+      "url": "https://www.amazon.in/dp/B08VASE999",
+      "image_url": "https://images.unsplash.com/photo-1616046229478-9901c5536a45?w=500",
+      "description": "Donut vase pair with textured matte finish for table centerpieces."
+    }
+  ],
+  "party": [
+    {
+      "id": "p-cat-01",
+      "name": "Swiggy Gourmet Party Feast (3-Course Meal per Plate)",
+      "category": "Catering",
+      "price_per_unit": 450,
+      "unit": "guest",
+      "platform": "Swiggy",
+      "url": "https://www.swiggy.com/gourmet-party-catering",
+      "image_url": "https://images.unsplash.com/photo-1555244162-803834f70033?w=500",
+      "description": "Includes 2 starters, 2 main gravies, assorted breads, rice, and dessert."
+    },
+    {
+      "id": "p-cat-02",
+      "name": "Zomato Live Barbecue & Kebab Station Experience",
+      "category": "Catering",
+      "price_per_unit": 650,
+      "unit": "guest",
+      "platform": "Zomato",
+      "url": "https://www.zomato.com/catering-bbq-live",
+      "image_url": "https://images.unsplash.com/photo-1544025162-d76694265947?w=500",
+      "description": "Live chef grilling paneer/chicken skewers, dips, sliders, and mocktails."
+    },
+    {
+      "id": "p-cat-03",
+      "name": "Budget Hi-Tea & Snack Platter Box Package",
+      "category": "Catering",
+      "price_per_unit": 220,
+      "unit": "guest",
+      "platform": "Swiggy",
+      "url": "https://www.swiggy.com/party-snack-boxes",
+      "image_url": "https://images.unsplash.com/photo-1509440159596-0249088772ff?w=500",
+      "description": "Sandwiches, mini samosas, cupcakes, juice, and hot beverage kettle."
+    },
+    {
+      "id": "p-venue-01",
+      "name": "OYO Townhouse Banquet & Lawn Hall (Half-Day Access)",
+      "category": "Venue",
+      "price": 18000,
+      "platform": "OYO",
+      "url": "https://www.oyorooms.com/banquets/townhouse-celebrations",
+      "image_url": "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=500",
+      "description": "Air-conditioned indoor banquet accommodating up to 60 guests with basic seating."
+    },
+    {
+      "id": "p-venue-02",
+      "name": "Rooftop Terrace Lounge with Panoramic City Views",
+      "category": "Venue",
+      "price": 28000,
+      "platform": "OYO",
+      "url": "https://www.oyorooms.com/banquets/rooftop-skyline",
+      "image_url": "https://images.unsplash.com/photo-1533105079780-92b9be482077?w=500",
+      "description": "Open-air scenic deck with ambient lighting, bar counter, and sound setup."
+    },
+    {
+      "id": "p-venue-03",
+      "name": "Community Club Social Hall (Budget Friendly)",
+      "category": "Venue",
+      "price": 8500,
+      "platform": "Local Venues",
+      "url": "https://www.pocketsmart.ai/venues/community-hall",
+      "image_url": "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=500",
+      "description": "Clean, spacious hall with stage, 50 chairs, and power backup."
+    },
+    {
+      "id": "p-decor-01",
+      "name": "Festive Theme Balloon Garland Arch & LED Backdrop",
+      "category": "Decoration",
+      "price": 4500,
+      "platform": "Amazon",
+      "url": "https://www.amazon.in/dp/B08DECORPARTY",
+      "image_url": "https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=500",
+      "description": "250 chrome/pastel balloons, neon light sign, and sequin curtain backdrop."
+    },
+    {
+      "id": "p-decor-02",
+      "name": "Fresh Exotic Floral & Fairy String Light Table Centerpieces",
+      "category": "Decoration",
+      "price": 7500,
+      "platform": "Flipkart",
+      "url": "https://www.flipkart.com/floral-event-decor",
+      "image_url": "https://images.unsplash.com/photo-1478146896981-b80fe463b330?w=500",
+      "description": "Handcrafted rose and baby's-breath arrangements with warm fairy light mason jars."
+    },
+    {
+      "id": "p-decor-03",
+      "name": "DIY Eco Party Decor Kit (Paper Lanterns, Banners, Photo Props)",
+      "category": "Decoration",
+      "price": 1499,
+      "platform": "Amazon",
+      "url": "https://www.amazon.in/dp/B09DIYDECOR",
+      "image_url": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=500",
+      "description": "Biodegradable paper pom-poms, customized bunting, and funny photo sticks."
+    },
+    {
+      "id": "p-ent-01",
+      "name": "Professional DJ Setup with High-Power Sound & Strobe Lights",
+      "category": "Entertainment",
+      "price": 12000,
+      "platform": "Local Artists",
+      "url": "https://www.pocketsmart.ai/entertainment/dj-package",
+      "image_url": "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=500",
+      "description": "4 hours of high-energy commercial and Bollywood tracks with smoke machine."
+    },
+    {
+      "id": "p-ent-02",
+      "name": "Acoustic Live Music Duo (Guitar & Vocalist)",
+      "category": "Entertainment",
+      "price": 9500,
+      "platform": "Local Artists",
+      "url": "https://www.pocketsmart.ai/entertainment/acoustic-duo",
+      "image_url": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=500",
+      "description": "Soothing soulful pop, retro, and indie covers tailored to intimate gatherings."
+    },
+    {
+      "id": "p-ent-03",
+      "name": "Interactive Photo Booth with Instant Polaroid Prints",
+      "category": "Entertainment",
+      "price": 5500,
+      "platform": "Amazon",
+      "url": "https://www.amazon.in/dp/B08BOOTHRENT",
+      "image_url": "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=500",
+      "description": "Ring light stand, iPad kiosk, unlimited digital sharing, and 100 print cards."
+    }
+  ],
+  "jewelry": [
+    {
+      "id": "j-ear-01",
+      "name": "GIVA 925 Sterling Silver Classic Solitaire Stud Earrings",
+      "category": "Earrings",
+      "style": "Minimalist",
+      "price": 1699,
+      "platform": "Amazon",
+      "url": "https://www.amazon.in/dp/B08GIVA001",
+      "image_url": "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=500",
+      "description": "Rhodium-plated hypoallergenic pure silver studs with AAA+ grade zircon."
+    },
+    {
+      "id": "j-ear-02",
+      "name": "Kundan & Pearl Chandbali Heavy Drop Earrings (Gold Plated)",
+      "category": "Earrings",
+      "style": "Ethnic/Traditional",
+      "price": 2899,
+      "platform": "Flipkart",
+      "url": "https://www.flipkart.com/kundan-chandbali-earrings",
+      "image_url": "https://images.unsplash.com/photo-1630019852942-f89202989a59?w=500",
+      "description": "Handcrafted meenakari enamel work with cluster pearls, ideal for festive lehengas."
+    },
+    {
+      "id": "j-ear-03",
+      "name": "Geometric 18K Gold Plated Chunky Huggie Hoops",
+      "category": "Earrings",
+      "style": "Contemporary",
+      "price": 999,
+      "platform": "Amazon",
+      "url": "https://www.amazon.in/dp/B09HOOP456",
+      "image_url": "https://images.unsplash.com/photo-1635767798638-3e25273a8236?w=500",
+      "description": "Tarnish-free stainless steel water-resistant everyday lightweight hoops."
+    },
+    {
+      "id": "j-neck-01",
+      "name": "Mia by Tanishq 14kt Yellow Gold Dainty Floral Pendant Necklace",
+      "category": "Necklace",
+      "style": "Modern Luxury",
+      "price": 14999,
+      "platform": "Amazon",
+      "url": "https://www.amazon.in/dp/B09MIATAN0",
+      "image_url": "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=500",
+      "description": "Certified hallmarked 14k gold chain with brilliant diamond-cut floral motif."
+    },
+    {
+      "id": "j-neck-02",
+      "name": "Layered Coin & Pearl Choker Necklace (Gold Tone)",
+      "category": "Necklace",
+      "style": "Bohemian/Modern",
+      "price": 1299,
+      "platform": "Amazon",
+      "url": "https://www.amazon.in/dp/B07COINCHOK",
+      "image_url": "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=500",
+      "description": "Dual-strand choker with baroque freshwater faux pearls and embossed medallion."
+    },
+    {
+      "id": "j-neck-03",
+      "name": "Zaveri Pearls Regal Green Emerald Choker Jewellery Set with Maangtikka",
+      "category": "Necklace",
+      "style": "Ethnic/Bridal",
+      "price": 3499,
+      "platform": "Flipkart",
+      "url": "https://www.flipkart.com/zaveri-pearls-choker-set",
+      "image_url": "https://images.unsplash.com/photo-1611591475879-1123e4e9a3b9?w=500",
+      "description": "Antique gold finish embellished with synthetic emerald drops and matching studs."
+    },
+    {
+      "id": "j-brace-01",
+      "name": "GIVA 925 Silver Rose Gold Falling Dew Tennis Bracelet",
+      "category": "Bracelet",
+      "style": "Modern",
+      "price": 2899,
+      "platform": "Amazon",
+      "url": "https://www.amazon.in/dp/B08GIVATEN",
+      "image_url": "https://images.unsplash.com/photo-1611591475879-1123e4e9a3b9?w=500",
+      "description": "Interlocking circular stones with adjustable slider mechanism."
+    },
+    {
+      "id": "j-brace-02",
+      "name": "Traditional Handcrafted Matte Temple Bangle Set (Pack of 4)",
+      "category": "Bangles",
+      "style": "Ethnic/Traditional",
+      "price": 1799,
+      "platform": "Flipkart",
+      "url": "https://www.flipkart.com/temple-bangles-set",
+      "image_url": "https://images.unsplash.com/photo-1602751584552-8ba73aad10e1?w=500",
+      "description": "Goddess Lakshmi motif embossed with ruby colored cabochons."
+    },
+    {
+      "id": "j-ring-01",
+      "name": "Swarovski Attract Round Solitaire Halo Cocktail Ring",
+      "category": "Rings",
+      "style": "Luxury",
+      "price": 6490,
+      "platform": "Amazon",
+      "url": "https://www.amazon.in/dp/B07SWAROV0",
+      "image_url": "https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=500",
+      "description": "Center brilliant-cut crystal surrounded by pavé halos in rhodium setting."
+    },
+    {
+      "id": "j-ring-02",
+      "name": "Minimalist Adjustable Wave Ring in 925 Sterling Silver",
+      "category": "Rings",
+      "style": "Minimalist",
+      "price": 799,
+      "platform": "Amazon",
+      "url": "https://www.amazon.in/dp/B08WAVERING",
+      "image_url": "https://images.unsplash.com/photo-1603561591411-07134e71a2a9?w=500",
+      "description": "Delicate curved band that stacks effortlessly with other rings."
+    }
+  ]
+}

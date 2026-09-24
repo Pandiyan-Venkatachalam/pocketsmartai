@@ -1,0 +1,48 @@
+{
+  "construction": {
+    "institutional_cost_per_sqft": 1800,
+    "residential_cost_per_sqft": 1600,
+    "classroom_area_sqft": 400,
+    "office_area_sqft": 150,
+    "staff_room_area_sqft": 200,
+    "toilet_area_sqft": 100,
+    "circulation_multiplier": 1.30
+  },
+  "materials": {
+    "cement_price_per_bag": 400,
+    "steel_price_per_kg": 65,
+    "basic_tile_price_per_sqft": 50,
+    "institutional_cement_factor": 0.45,
+    "institutional_steel_factor": 3.5,
+    "residential_cement_factor": 0.42,
+    "residential_steel_factor": 3.2
+  },
+  "furniture": {
+    "school_bench_cost": 3000,
+    "blackboard_cost": 5000,
+    "benches_per_classroom": 20
+  },
+  "travel": {
+    "avg_cost_pp_pd": 8000,
+    "budget_feasibility_threshold": 10000
+  },
+  "renovation": {
+    "budget_feasibility_threshold": 50000,
+    "premium_threshold": 300000
+  },
+  "events": {
+    "wedding_catering_pp": 1500,
+    "wedding_decor_base": 50000,
+    "party_catering_pp": 800,
+    "party_decor_base": 15000,
+    "party_budget_feasibility_threshold_pp": 500,
+    "wedding_avg_cost_per_guest": 2500,
+    "wedding_budget_feasibility_threshold": 100000
+  },
+  "business": {
+    "retail_setup_cost_sqft": 2000,
+    "restaurant_setup_cost_sqft": 4500,
+    "office_setup_cost_sqft": 1500,
+    "budget_feasibility_threshold": 200000
+  }
+}

@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}PocketSmart AI — Smart Budget & Recommendation Assistant{% endblock %}</title>
+    <link rel="stylesheet" href="/static/css/style.css?v=3.1">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <script>
+        // Check saved sidebar preference before rendering to prevent layout pop
+        if (localStorage.getItem('ps_sidebar_closed') === 'true' && window.innerWidth > 900) {
+            document.documentElement.classList.add('sidebar-closed');
+        }
+
+        // Global sidebar open/close
+        function closeSidebar(e) {
+            if (e && e.preventDefault) { e.preventDefault(); e.stopPropagation(); }
+            document.body.classList.add('sidebar-closed');
+            document.documentElement.classList.add('sidebar-closed');
+            var sidebar = document.getElementById('sidebar');
+            var overlay = document.getElementById('sidebar-overlay');
+            if (sidebar) sidebar.classList.remove('open');
+            if (overlay) overlay.classList.remove('active');
+            try { localStorage.setItem('ps_sidebar_closed', 'true'); } catch(err){}
+        }
+
+        function openSidebar(e) {
+            if (e && e.preventDefault) { e.preventDefault(); e.stopPropagation(); }
+            document.body.classList.remove('sidebar-closed');
+            document.documentElement.classList.remove('sidebar-closed');
+            var sidebar = document.getElementById('sidebar');
+            var overlay = document.getElementById('sidebar-overlay');
+            if (window.innerWidth <= 900) {
+                if (sidebar) sidebar.classList.add('open');
+                if (overlay) overlay.classList.add('active');
+            }
+            try { localStorage.setItem('ps_sidebar_closed', 'false'); } catch(err){}
+        }
+
+        function toggleSidebar(forceOpen, e) {
+            if (e && e.preventDefault) { e.preventDefault(); e.stopPropagation(); }
+            var isClosed = document.body.classList.contains('sidebar-closed') || 
+                           document.documentElement.classList.contains('sidebar-closed');
+            if (forceOpen === true || isClosed) {
+                openSidebar(e);
+            } else {
+                closeSidebar(e);
+            }
+        }
+
+        // Universal card click handler
+        function handleCardClick(e, url, target) {
+            if (!url) return;
+            // Don't intercept clicks on links, buttons, inputs, icons
+            if (e && e.target && e.target.closest && e.target.closest('a, button, input, select, textarea, .icon-btn, .delete-history-btn, .sidebar-toggle-btn')) {
+                return;
+            }
+            if (target === '_blank') {
+                window.open(url, '_blank', 'noopener,noreferrer');
+            } else {
+                window.location.href = url;
+            }
+        }
+    </script>
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+
+    <!-- ============================================================
+         SIDEBAR NAVIGATION
+    ============================================================ -->
+    <aside class="sidebar" id="sidebar">
+
+        <!-- Brand Logo & Collapse Toggle -->
+        <div class="sidebar-brand">
+            <a href="/" class="brand-logo">
+                <div class="brand-icon">⚡</div>
+                <div class="brand-text">PocketSmart<span>.AI</span></div>
+            </a>
+            <button class="sidebar-toggle-btn" id="sidebar-collapse-btn" onclick="closeSidebar(event)" title="Close Sidebar (Ctrl+B)" aria-label="Close Sidebar" type="button">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="pointer-events: none;">
+                    <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+            </button>
+        </div>
+
+        <!-- Nav Links -->
+        <nav class="sidebar-nav">
+            <p class="sidebar-section-label">Menu</p>
+            <ul class="sidebar-links">
+                <li>
+                    <a href="/" class="sidebar-link {% if request.url.path == '/' %}active{% endif %}">
+                        <span class="sidebar-icon">🏠</span>
+                        <span>Home</span>
+                    </a>
+                </li>
+                {% if user %}
+                <li>
+                    <a href="/dashboard" class="sidebar-link {% if request.url.path == '/dashboard' %}active{% endif %}">
+                        <span class="sidebar-icon">📊</span>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+
+                <p class="sidebar-section-label" style="margin-top: 1.25rem;">Planners</p>
+                <li>
+                    <a href="/planners/home" class="sidebar-link {% if 'home' in request.url.path %}active{% endif %}">
+                        <span class="sidebar-icon">🛋️</span>
+                        <span>Home Interior</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/planners/party" class="sidebar-link {% if 'party' in request.url.path %}active{% endif %}">
+                        <span class="sidebar-icon">🎉</span>
+                        <span>Party Planner</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/planners/jewelry" class="sidebar-link {% if 'jewelry' in request.url.path %}active{% endif %}">
+                        <span class="sidebar-icon">💎</span>
+                        <span>Jewelry Styler</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/planners/custom" class="sidebar-link {% if 'custom' in request.url.path %}active{% endif %}">
+                        <span class="sidebar-icon">✨</span>
+                        <span>Custom Plan</span>
+                    </a>
+                </li>
+
+                <p class="sidebar-section-label" style="margin-top: 1.25rem;">Account</p>
+                <li>
+                    <a href="/history" class="sidebar-link {% if request.url.path == '/history' %}active{% endif %}">
+                        <span class="sidebar-icon">📋</span>
+                        <span>History</span>
+                    </a>
+                </li>
+                {% else %}
+                <li>
+                    <a href="/#features" class="sidebar-link">
+                        <span class="sidebar-icon">⚡</span>
+                        <span>Features</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/#planners" class="sidebar-link">
+                        <span class="sidebar-icon">🗂️</span>
+                        <span>Planners</span>
+                    </a>
+                </li>
+                {% endif %}
+            </ul>
+        </nav>
+
+        <!-- Sidebar Footer — User Info / Auth -->
+        <div class="sidebar-footer">
+            {% if user %}
+            <div class="sidebar-user">
+                <div class="sidebar-user-avatar">{{ user.name[0]|upper }}</div>
+                <div class="sidebar-user-info">
+                    <div class="sidebar-user-name">{{ user.name }}</div>
+                    <div class="sidebar-user-email">{{ user.email }}</div>
+                </div>
+            </div>
+            <button id="nav-logout-btn" class="btn btn-outline btn-sm btn-block" style="margin-top: 0.75rem;">
+                Sign Out
+            </button>
+            {% else %}
+            <a href="/login" class="btn btn-outline btn-sm btn-block" style="margin-bottom: 0.5rem;">Sign In</a>
+            <a href="/register" class="btn btn-primary btn-sm btn-block">Get Started →</a>
+            {% endif %}
+        </div>
+
+        <!-- Mobile toggle close button -->
+        <button class="sidebar-close-btn" id="sidebar-close" onclick="closeSidebar(event)" title="Close Sidebar" type="button">✕</button>
+    </aside>
+
+    <!-- Floating button to open sidebar when collapsed (Desktop) -->
+    <button class="sidebar-open-btn" id="sidebar-open-btn" onclick="openSidebar(event)" title="Open Sidebar (Ctrl+B)" aria-label="Open Sidebar" type="button">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="pointer-events: none;">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+        <span class="open-btn-text" style="pointer-events: none;">Menu</span>
+    </button>
+
+    <!-- Mobile overlay -->
+    <div class="sidebar-overlay" id="sidebar-overlay" onclick="closeSidebar(event)"></div>
+
+    <!-- Mobile topbar (visible only on small screens) -->
+    <div class="mobile-topbar">
+        <button class="hamburger-btn" onclick="openSidebar(event)" type="button">
+            ☰
+        </button>
+        <div class="brand-logo" style="font-size: 1.1rem;">
+            <div class="brand-icon" style="width: 28px; height: 28px; font-size: 0.8rem;">⚡</div>
+            <div class="brand-text">PocketSmart<span>.AI</span></div>
+        </div>
+        <div style="width: 40px;"></div>
+    </div>
+
+    <!-- ============================================================
+         MAIN CONTENT AREA (offset by sidebar width)
+    ============================================================ -->
+    <div class="page-wrapper">
+        <main class="main-content">
+            {% block content %}{% endblock %}
+        </main>
+
+        <!-- Global Footer -->
+        <footer class="footer">
+            <div style="display: flex; flex-direction: column; gap: 0.5rem; align-items: center;">
+                <div class="brand-logo" style="font-size: 1.1rem;">
+                    <div class="brand-icon" style="width: 26px; height: 26px; font-size: 0.8rem;">⚡</div>
+                    <div class="brand-text">PocketSmart<span>.AI</span></div>
+                </div>
+                <p style="color: var(--text-dim); font-size: 0.8rem;">
+                    Next-Gen AI Budget Planning &bull; Powered by Google Gemini 1.5 Flash &bull; Built with FastAPI
+                </p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="loading-overlay">
+        <div class="spinner"></div>
+        <p id="loading-msg" style="background: linear-gradient(135deg, #fb923c, #f472b6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-weight: 700; font-size: 1.2rem; text-align: center; max-width: 450px;"></p>
+        <p style="color: #b08ca0; font-size: 0.85rem;">AI is analyzing your plan...</p>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/static/js/main.js?v=3.0"></script>
+    {% block scripts %}{% endblock %}
+</body>
+</html>

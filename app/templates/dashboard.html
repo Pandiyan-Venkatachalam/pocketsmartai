@@ -1,0 +1,165 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard — PocketSmart AI{% endblock %}
+
+{% block content %}
+<div style="margin-bottom: 1.5rem;">
+    <h1 style="font-size: 1.9rem; margin-bottom: 0.25rem;">
+        Welcome, <span style="background: var(--gradient-brand); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">{{ stats.user_name }}</span> 👋
+    </h1>
+    <p style="color: var(--text-muted); font-size: 0.92rem;">Your AI budget intelligence dashboard.</p>
+</div>
+
+<!-- Metrics Cards Grid -->
+<!-- Metrics Cards Grid -->
+<div class="stats-grid">
+    <div class="stat-card" data-href="/history" onclick="handleCardClick(event, '/history')" title="Click to view all plan history">
+        <div class="stat-icon purple">📊</div>
+        <div class="stat-info">
+            <div class="stat-value">{{ stats.total_recommendations }}</div>
+            <div class="stat-label">Plans Created</div>
+        </div>
+    </div>
+
+    <div class="stat-card" data-href="/history" onclick="handleCardClick(event, '/history')" title="Click to view budget history">
+        <div class="stat-icon emerald">₹</div>
+        <div class="stat-info">
+            <div class="stat-value" style="font-size: 1.1rem;">₹{{ "{:,.0f}".format(stats.total_budget_planned) }}</div>
+            <div class="stat-label">Budget Optimized</div>
+        </div>
+    </div>
+
+    <div class="stat-card" data-href="/planners/home" onclick="handleCardClick(event, '/planners/home')" title="Click to launch Home Planner">
+        <div class="stat-icon blue">🛋️</div>
+        <div class="stat-info">
+            <div class="stat-value">{{ stats.planner_breakdown.get('home', 0) }}</div>
+            <div class="stat-label">Home Plans</div>
+        </div>
+    </div>
+
+    <div class="stat-card" data-href="/planners/party" onclick="handleCardClick(event, '/planners/party')" title="Click to launch Party Planner">
+        <div class="stat-icon amber">🎉</div>
+        <div class="stat-info">
+            <div class="stat-value">{{ stats.planner_breakdown.get('party', 0) }}</div>
+            <div class="stat-label">Party Plans</div>
+        </div>
+    </div>
+</div>
+
+<!-- Quick Launch Planner Actions -->
+<div style="margin-bottom: 2rem;">
+    <h3 style="font-size: 1.25rem; margin-bottom: 1rem;">Start a New Budget Plan</h3>
+    <div class="planners-grid" style="margin-bottom: 0;">
+        <div class="planner-card" data-href="/planners/home" onclick="handleCardClick(event, '/planners/home')">
+            <div>
+                <span class="planner-badge badge-home">Home Interior</span>
+                <h4 style="font-size: 1.1rem; margin-bottom: 0.4rem;">Furnish Living or Bedroom</h4>
+                <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">
+                    Allocate budget for sofas, dining sets, lighting, and wall decor from IKEA & Amazon.
+                </p>
+            </div>
+            <a href="/planners/home" class="btn btn-primary btn-sm btn-block">New Home Plan →</a>
+        </div>
+
+        <div class="planner-card" data-href="/planners/party" onclick="handleCardClick(event, '/planners/party')">
+            <div>
+                <span class="planner-badge badge-party">Party & Event</span>
+                <h4 style="font-size: 1.1rem; margin-bottom: 0.4rem;">Host an Event</h4>
+                <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">
+                    Calculate per-guest catering, book party venues on OYO, and book DJ entertainment.
+                </p>
+            </div>
+            <a href="/planners/party" class="btn btn-primary btn-sm btn-block">New Party Plan →</a>
+        </div>
+
+        <div class="planner-card" data-href="/planners/jewelry" onclick="handleCardClick(event, '/planners/jewelry')">
+            <div>
+                <span class="planner-badge badge-jewelry">Jewelry Stylist</span>
+                <h4 style="font-size: 1.1rem; margin-bottom: 0.4rem;">Outfit & Occasion Match</h4>
+                <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">
+                    Upload outfit photo or specify style to pair earrings, necklaces, and bangles.
+                </p>
+            </div>
+            <a href="/planners/jewelry" class="btn btn-primary btn-sm btn-block">New Jewelry Plan →</a>
+        </div>
+
+        <div class="planner-card" data-href="/planners/custom" onclick="handleCardClick(event, '/planners/custom')">
+            <div>
+                <span class="planner-badge badge-custom">Universal Custom</span>
+                <h4 style="font-size: 1.1rem; margin-bottom: 0.4rem;">Create Any Plan</h4>
+                <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">
+                    Vacations, tech rigs, home gyms, wedding shopping, or any custom lifestyle wish.
+                </p>
+            </div>
+            <a href="/planners/custom" class="btn btn-primary btn-sm btn-block">New Custom Plan →</a>
+        </div>
+    </div>
+</div>
+
+<!-- Recent Recommendations Table -->
+<div class="card" style="padding: 1.25rem;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+        <div>
+            <h3 style="font-size: 1.1rem; margin-bottom: 0.1rem;">Recent Plans</h3>
+            <p style="color: var(--text-muted); font-size: 0.82rem;">Your latest AI budget plans</p>
+        </div>
+        <a href="/history" class="btn btn-outline btn-sm">All History →</a>
+    </div>
+
+    {% if stats.recent_recommendations and stats.recent_recommendations|length > 0 %}
+    <div class="history-table-container">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Type</th>
+                    <th>Plan</th>
+                    <th>Budget</th>
+                    <th>Cost</th>
+                    <th>Items</th>
+                    <th style="text-align:center;">View</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for r in stats.recent_recommendations %}
+                <tr data-href="/recommendations/{{ r.id }}" class="clickable-row" onclick="handleCardClick(event, '/recommendations/{{ r.id }}')" title="Click to view plan">
+                    <td style="color: var(--text-muted); white-space: nowrap; font-size: 0.82rem;">{{ r.created_at.strftime('%d %b %Y') }}</td>
+                    <td>
+                        {% if r.planner_type == 'home' %}
+                        <span class="planner-badge badge-home">Home</span>
+                        {% elif r.planner_type == 'party' %}
+                        <span class="planner-badge badge-party">Party</span>
+                        {% elif r.planner_type == 'jewelry' %}
+                        <span class="planner-badge badge-jewelry">Jewelry</span>
+                        {% else %}
+                        <span class="planner-badge badge-custom">Custom</span>
+                        {% endif %}
+                    </td>
+                    <td style="max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                        <span title="{{ r.summary }}">{{ r.summary }}</span>
+                    </td>
+                    <td style="white-space: nowrap; font-size: 0.88rem;">₹{{ "{:,.0f}".format(r.budget) }}</td>
+                    <td style="color: #34d399; font-weight: 600; white-space: nowrap; font-size: 0.88rem;">₹{{ "{:,.0f}".format(r.total_estimated_cost) }}</td>
+                    <td style="text-align: center;">
+                        <span style="display: inline-block; padding: 2px 9px; border-radius: 999px; background: rgba(255,255,255,0.06); border: 1px solid var(--border-subtle); color: var(--text-pure); font-weight: 600; font-size: 0.82rem;">{{ r.items_count }}</span>
+                    </td>
+                    <td style="text-align: center;">
+                        <a href="/recommendations/{{ r.id }}" class="icon-btn" title="View Plan">👁️</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+    <div style="text-align: center; padding: 2.5rem 1rem;">
+        <div style="font-size: 2.5rem; margin-bottom: 0.75rem;">📋</div>
+        <h4 style="font-size: 1.1rem; margin-bottom: 0.35rem;">No plans yet</h4>
+        <p style="color: var(--text-muted); font-size: 0.88rem; margin-bottom: 1.25rem;">
+            Choose a planner above to create your first budget plan!
+        </p>
+        <a href="/planners/home" class="btn btn-primary btn-sm">Create First Plan →</a>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
