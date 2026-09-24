@@ -1381,3 +1381,300 @@ textarea.form-control { min-height: 90px; resize: vertical; }
   .form-row       { grid-template-columns: 1fr; }
   .budget-stats-row { grid-template-columns: 1fr 1fr; }
 }
+
+/* ==========================================================================
+   LIGHT MODE THEME & TOGGLE BUTTON
+   ========================================================================== */
+[data-theme="light"] {
+  --bg-primary:       #f8fafc;
+  --bg-secondary:     #ffffff;
+  --bg-surface:       #ffffff;
+  --bg-surface-hover: #f1f5f9;
+  --bg-input:         #f8fafc;
+  --bg-deep:          #e2e8f0;
+
+  --border-subtle:    #e2e8f0;
+  --border-active:    #cbd5e1;
+  --border-focus:     #f97316;
+
+  --text-pure:        #0f172a;
+  --text-main:        #1e293b;
+  --text-muted:       #64748b;
+  --text-dim:         #94a3b8;
+}
+
+[data-theme="light"] body {
+  background: var(--bg-primary);
+  color: var(--text-main);
+}
+
+[data-theme="light"] .sidebar {
+  background: #ffffff;
+  border-right: 1px solid var(--border-subtle);
+}
+
+[data-theme="light"] .card,
+[data-theme="light"] .rec-item-card,
+[data-theme="light"] .budget-summary-banner,
+[data-theme="light"] .domain-breakdown-card,
+[data-theme="light"] .stat-card,
+[data-theme="light"] .plan-card-sm {
+  background: #ffffff;
+  border-color: var(--border-subtle);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+}
+
+[data-theme="light"] .sidebar-link {
+  color: var(--text-muted);
+}
+
+[data-theme="light"] .sidebar-link:hover,
+[data-theme="light"] .sidebar-link.active {
+  background: rgba(249, 115, 22, 0.1);
+  color: var(--primary);
+}
+
+[data-theme="light"] .form-input,
+[data-theme="light"] .form-select,
+[data-theme="light"] .form-textarea {
+  background: #ffffff;
+  border-color: var(--border-subtle);
+  color: var(--text-main);
+}
+
+[data-theme="light"] .btn-secondary,
+[data-theme="light"] .btn-outline {
+  background: #ffffff;
+  border-color: var(--border-subtle);
+  color: var(--text-main);
+}
+
+[data-theme="light"] .btn-secondary:hover,
+[data-theme="light"] .btn-outline:hover {
+  background: #f1f5f9;
+}
+
+[data-theme="light"] .budget-summary-banner .budget-metric .value {
+  color: var(--text-pure);
+}
+
+[data-theme="light"] .budget-summary-banner .budget-metric .value.indigo { color: #4f46e5; }
+[data-theme="light"] .budget-summary-banner .budget-metric .value.emerald { color: #059669; }
+[data-theme="light"] .budget-summary-banner .budget-metric .value.cyan { color: #0284c7; }
+
+[data-theme="light"] .budget-progress-track {
+  background: #e2e8f0;
+}
+
+[data-theme="light"] .mobile-topbar {
+  background: #ffffff;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+[data-theme="light"] .footer {
+  border-top: 1px solid var(--border-subtle);
+  background: #ffffff;
+}
+
+/* Theme Toggle Button */
+.theme-toggle-btn {
+  background: var(--bg-surface-hover);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  width: 34px;
+  height: 34px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1.05rem;
+  transition: var(--transition);
+  color: var(--text-main);
+  padding: 0;
+  flex-shrink: 0;
+}
+
+.theme-toggle-btn:hover {
+  border-color: var(--primary);
+  transform: translateY(-1px);
+}
+
+/* ==========================================================================
+   PRINT / PDF EXPORT STYLES (Clean, ink-friendly, proper content only)
+   ========================================================================== */
+.print-only {
+  display: none;
+}
+
+@media print {
+  /* 1. Hide non-printable UI elements */
+  aside,
+  .sidebar,
+  .sidebar-overlay,
+  .sidebar-open-btn,
+  .sidebar-toggle-btn,
+  .sidebar-close-btn,
+  .mobile-topbar,
+  .top-navbar,
+  nav,
+  .footer,
+  .btn,
+  button,
+  .theme-toggle-btn,
+  .no-print,
+  #nav-logout-btn,
+  a[href^="/history"],
+  .clickable-card::after {
+    display: none !important;
+  }
+
+  /* 2. Page & Layout Reset */
+  @page {
+    margin: 1.2cm;
+    size: auto;
+  }
+
+  html, body {
+    background: #ffffff !important;
+    color: #0f172a !important;
+    font-size: 10.5pt !important;
+    line-height: 1.5 !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  .page-wrapper {
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .main-content {
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  /* 3. Print Header */
+  .print-only {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    border-bottom: 2px solid #ea580c !important;
+    padding-bottom: 0.75rem !important;
+    margin-bottom: 1.25rem !important;
+  }
+
+  /* 4. Cards & Summaries */
+  .card,
+  .rec-item-card,
+  .budget-summary-banner,
+  .domain-breakdown-card,
+  .plan-card-sm {
+    background: #ffffff !important;
+    color: #0f172a !important;
+    border: 1px solid #cbd5e1 !important;
+    box-shadow: none !important;
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+    margin-bottom: 1rem !important;
+    padding: 0.85rem !important;
+  }
+
+  .budget-summary-banner {
+    background: #f8fafc !important;
+    border: 1px solid #cbd5e1 !important;
+  }
+
+  .budget-summary-banner .label {
+    color: #475569 !important;
+  }
+
+  .budget-summary-banner .value {
+    color: #0f172a !important;
+    font-weight: 700 !important;
+  }
+
+  .budget-progress-track {
+    background: #e2e8f0 !important;
+    border: 1px solid #cbd5e1 !important;
+  }
+
+  .budget-progress-bar {
+    background: #ea580c !important;
+  }
+
+  /* 5. Typography */
+  h1, h2, h3, h4, h5, h6, strong, .value, .rec-item-title {
+    color: #0f172a !important;
+  }
+
+  p, span, .rec-item-reason, .bullet-list li, .plan-list li {
+    color: #334155 !important;
+  }
+
+  /* 6. Grid Layout for Recommended Items */
+  .recommendations-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 1rem !important;
+  }
+
+  .rec-item-card {
+    border: 1px solid #cbd5e1 !important;
+    border-radius: 8px !important;
+    overflow: hidden !important;
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+    padding: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+
+  .rec-card-image {
+    max-height: 125px !important;
+    width: 100% !important;
+    object-fit: cover !important;
+    border-bottom: 1px solid #e2e8f0 !important;
+  }
+
+  .rec-card-body {
+    padding: 0.75rem !important;
+  }
+
+  .rec-item-price {
+    color: #ea580c !important;
+    font-size: 1.15rem !important;
+    font-weight: 700 !important;
+  }
+
+  /* Hide shopping action buttons inside items in PDF print */
+  .rec-card-body .btn,
+  .rec-card-body a {
+    display: none !important;
+  }
+
+  /* Tables in Print */
+  .plan-table {
+    width: 100% !important;
+    border-collapse: collapse !important;
+  }
+
+  .plan-table th, .plan-table td {
+    border: 1px solid #cbd5e1 !important;
+    color: #0f172a !important;
+    padding: 6px 8px !important;
+    background: #ffffff !important;
+    font-size: 9pt !important;
+  }
+
+  .plan-table th {
+    background: #f1f5f9 !important;
+    font-weight: 700 !important;
+  }
+}
