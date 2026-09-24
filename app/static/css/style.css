@@ -1499,68 +1499,110 @@ textarea.form-control { min-height: 90px; resize: vertical; }
   transform: translateY(-1px);
 }
 
-/* ==========================================================================
-   PRINT / PDF EXPORT STYLES (Clean, ink-friendly, proper content only)
-   ========================================================================== */
-.print-only {
-  display: none;
+
+/* ──────────────────────────────────────────────
+   GLOBAL THEME TOGGLE — Fixed top-right corner
+   ────────────────────────────────────────────── */
+.global-theme-btn {
+  position: fixed;
+  top: 14px;
+  right: 16px;
+  z-index: 9999;
+  background: var(--bg-surface-hover, rgba(255,255,255,0.08));
+  border: 1px solid var(--border-subtle, rgba(255,255,255,0.12));
+  border-radius: 50%;
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1.15rem;
+  transition: all 0.25s ease;
+  color: var(--text-main, #e2e8f0);
+  padding: 0;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.35);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 
+.global-theme-btn:hover {
+  border-color: var(--primary, #f97316);
+  box-shadow: 0 0 0 3px rgba(249,115,22,0.2), 0 4px 16px rgba(0,0,0,0.4);
+  transform: scale(1.08);
+}
+
+[data-theme="light"] .global-theme-btn {
+  background: rgba(241,245,249,0.95);
+  border-color: #e2e8f0;
+  color: #1e293b;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+}
+
+[data-theme="light"] .global-theme-btn:hover {
+  border-color: #f97316;
+  box-shadow: 0 0 0 3px rgba(249,115,22,0.15), 0 4px 16px rgba(0,0,0,0.12);
+}
+
+/* ==========================================================================
+   PRINT / PDF EXPORT STYLES — clean, ink-friendly, proper content only
+   ========================================================================== */
+.print-only { display: none; }
+
 @media print {
-  /* 1. Hide non-printable UI elements */
-  aside,
-  .sidebar,
-  .sidebar-overlay,
-  .sidebar-open-btn,
-  .sidebar-toggle-btn,
-  .sidebar-close-btn,
-  .mobile-topbar,
-  .top-navbar,
-  nav,
-  .footer,
-  .btn,
-  button,
-  .theme-toggle-btn,
-  .no-print,
-  #nav-logout-btn,
+
+  /* ── 1. Global hide: all UI chrome ── */
+  aside, .sidebar, .sidebar::after, .sidebar::before,
+  .sidebar-overlay, .sidebar-open-btn, .sidebar-close-btn,
+  .sidebar-toggle-btn, .mobile-topbar, .hamburger-btn,
+  nav, .footer, .btn, button,
+  .global-theme-btn, .theme-toggle-btn,
+  .no-print, #nav-logout-btn,
   a[href^="/history"],
-  .clickable-card::after {
+  .clickable-card::after,
+  .loading-overlay {
     display: none !important;
   }
 
-  /* 2. Page & Layout Reset */
+  /* ── 2. Page canvas ── */
   @page {
-    margin: 1.2cm;
-    size: auto;
+    margin: 1.5cm 1.2cm 1.5cm 1.2cm;
+    size: A4 portrait;
   }
 
   html, body {
     background: #ffffff !important;
     color: #0f172a !important;
-    font-size: 10.5pt !important;
-    line-height: 1.5 !important;
+    font-size: 10pt !important;
+    line-height: 1.55 !important;
     width: 100% !important;
     margin: 0 !important;
     padding: 0 !important;
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
+    overflow: visible !important;
   }
 
+  /* ── 3. Layout: remove sidebar offset, full-width ── */
   .page-wrapper {
     margin: 0 !important;
     padding: 0 !important;
     width: 100% !important;
     max-width: 100% !important;
+    min-height: unset !important;
+    display: block !important;
+    overflow: visible !important;
   }
 
   .main-content {
     margin: 0 !important;
-    padding: 0 !important;
+    padding: 0 0 2rem 0 !important;
     width: 100% !important;
     max-width: 100% !important;
+    overflow: visible !important;
   }
 
-  /* 3. Print Header */
+  /* ── 4. Print-only header ── */
   .print-only {
     display: flex !important;
     justify-content: space-between !important;
@@ -1570,20 +1612,24 @@ textarea.form-control { min-height: 90px; resize: vertical; }
     margin-bottom: 1.25rem !important;
   }
 
-  /* 4. Cards & Summaries */
-  .card,
-  .rec-item-card,
-  .budget-summary-banner,
-  .domain-breakdown-card,
-  .plan-card-sm {
+  /* ── 5. Cards & plan sections ── */
+  .card, .rec-item-card, .budget-summary-banner,
+  .domain-breakdown-card, .plan-card-sm, .plan-grid-2 > div {
     background: #ffffff !important;
     color: #0f172a !important;
     border: 1px solid #cbd5e1 !important;
+    border-left-color: #cbd5e1 !important;
     box-shadow: none !important;
     break-inside: avoid !important;
     page-break-inside: avoid !important;
-    margin-bottom: 1rem !important;
-    padding: 0.85rem !important;
+    margin-bottom: 0.8rem !important;
+    padding: 0.8rem !important;
+    overflow: visible !important;
+  }
+
+  /* Force two-col grid back to single column for PDF safety */
+  .plan-grid-2 {
+    display: block !important;
   }
 
   .budget-summary-banner {
@@ -1591,25 +1637,12 @@ textarea.form-control { min-height: 90px; resize: vertical; }
     border: 1px solid #cbd5e1 !important;
   }
 
-  .budget-summary-banner .label {
-    color: #475569 !important;
-  }
+  .budget-summary-banner .label { color: #475569 !important; }
+  .budget-summary-banner .value { color: #0f172a !important; font-weight: 700 !important; }
+  .budget-progress-track { background: #e2e8f0 !important; border: 1px solid #cbd5e1 !important; }
+  .budget-progress-bar { background: #ea580c !important; }
 
-  .budget-summary-banner .value {
-    color: #0f172a !important;
-    font-weight: 700 !important;
-  }
-
-  .budget-progress-track {
-    background: #e2e8f0 !important;
-    border: 1px solid #cbd5e1 !important;
-  }
-
-  .budget-progress-bar {
-    background: #ea580c !important;
-  }
-
-  /* 5. Typography */
+  /* ── 6. Typography ── */
   h1, h2, h3, h4, h5, h6, strong, .value, .rec-item-title {
     color: #0f172a !important;
   }
@@ -1618,63 +1651,80 @@ textarea.form-control { min-height: 90px; resize: vertical; }
     color: #334155 !important;
   }
 
-  /* 6. Grid Layout for Recommended Items */
+  /* ── 7. Recommended items grid — 2 columns ── */
   .recommendations-grid {
     display: grid !important;
     grid-template-columns: repeat(2, 1fr) !important;
-    gap: 1rem !important;
+    gap: 0.75rem !important;
+    overflow: visible !important;
   }
 
   .rec-item-card {
     border: 1px solid #cbd5e1 !important;
     border-radius: 8px !important;
-    overflow: hidden !important;
+    overflow: visible !important;
     break-inside: avoid !important;
     page-break-inside: avoid !important;
     padding: 0 !important;
     display: flex !important;
     flex-direction: column !important;
+    height: auto !important;
   }
 
   .rec-card-image {
-    max-height: 125px !important;
+    max-height: 120px !important;
     width: 100% !important;
     object-fit: cover !important;
     border-bottom: 1px solid #e2e8f0 !important;
+    display: block !important;
   }
 
   .rec-card-body {
-    padding: 0.75rem !important;
+    padding: 0.65rem !important;
+    overflow: visible !important;
   }
 
-  .rec-item-price {
-    color: #ea580c !important;
-    font-size: 1.15rem !important;
-    font-weight: 700 !important;
-  }
+  .rec-item-price { color: #ea580c !important; font-size: 1.05rem !important; font-weight: 700 !important; }
 
-  /* Hide shopping action buttons inside items in PDF print */
-  .rec-card-body .btn,
-  .rec-card-body a {
-    display: none !important;
-  }
+  /* Hide shopping links inside cards */
+  .rec-card-body .btn, .rec-card-body a { display: none !important; }
 
-  /* Tables in Print */
+  /* ── 8. Plan list bullets ── */
+  .bullet-list, .plan-list { padding-left: 1.2rem !important; }
+  .bullet-list li, .plan-list li { margin-bottom: 0.25rem !important; }
+
+  /* ── 9. Tables ── */
   .plan-table {
     width: 100% !important;
     border-collapse: collapse !important;
+    page-break-inside: auto !important;
   }
+
+  .plan-table tr { page-break-inside: avoid !important; }
 
   .plan-table th, .plan-table td {
     border: 1px solid #cbd5e1 !important;
     color: #0f172a !important;
-    padding: 6px 8px !important;
+    padding: 5px 7px !important;
     background: #ffffff !important;
-    font-size: 9pt !important;
+    font-size: 8.5pt !important;
   }
 
   .plan-table th {
     background: #f1f5f9 !important;
     font-weight: 700 !important;
   }
+
+  /* ── 10. Planner badges ── */
+  .planner-badge {
+    border: 1px solid #cbd5e1 !important;
+    background: #f1f5f9 !important;
+    color: #334155 !important;
+    font-size: 0.75rem !important;
+    padding: 0.15rem 0.5rem !important;
+    border-radius: 4px !important;
+    print-color-adjust: exact !important;
+    -webkit-print-color-adjust: exact !important;
+  }
+
 }

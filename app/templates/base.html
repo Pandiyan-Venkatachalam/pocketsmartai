@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}PocketSmart AI — Smart Budget & Recommendation Assistant{% endblock %}</title>
-    <link rel="stylesheet" href="/static/css/style.css?v=3.1">
+    <link rel="stylesheet" href="/static/css/style.css?v=4.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <script>
@@ -102,17 +102,11 @@
                 <div class="brand-icon">⚡</div>
                 <div class="brand-text">PocketSmart<span>.AI</span></div>
             </a>
-            <div style="display:flex;align-items:center;gap:0.35rem;">
-                <button class="theme-toggle-btn" id="theme-toggle-btn" onclick="toggleTheme(event)" title="Toggle Light/Dark Theme" aria-label="Toggle Theme" type="button">
-                    <span class="theme-icon-dark">🌙</span>
-                    <span class="theme-icon-light" style="display:none;">☀️</span>
-                </button>
-                <button class="sidebar-toggle-btn" id="sidebar-collapse-btn" onclick="closeSidebar(event)" title="Close Sidebar (Ctrl+B)" aria-label="Close Sidebar" type="button">
+            <button class="sidebar-toggle-btn" id="sidebar-collapse-btn" onclick="closeSidebar(event)" title="Close Sidebar (Ctrl+B)" aria-label="Close Sidebar" type="button">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="pointer-events: none;">
                     <polyline points="15 18 9 12 15 6"></polyline>
                 </svg>
             </button>
-            </div>
         </div>
 
         <!-- Nav Links -->
@@ -228,10 +222,6 @@
             <div class="brand-icon" style="width: 28px; height: 28px; font-size: 0.8rem;">⚡</div>
             <div class="brand-text">PocketSmart<span>.AI</span></div>
         </div>
-        <button class="theme-toggle-btn" onclick="toggleTheme(event)" title="Toggle Light/Dark Theme" aria-label="Toggle Theme" type="button">
-            <span class="theme-icon-dark">🌙</span>
-            <span class="theme-icon-light" style="display:none;">☀️</span>
-        </button>
     </div>
 
     <!-- ============================================================
@@ -262,6 +252,19 @@
         <p id="loading-msg" style="background: linear-gradient(135deg, #fb923c, #f472b6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-weight: 700; font-size: 1.2rem; text-align: center; max-width: 450px;"></p>
         <p style="color: #b08ca0; font-size: 0.85rem;">AI is analyzing your plan...</p>
     </div>
+
+
+    <!-- ── Fixed top-right theme toggle ── -->
+    <button
+      id="global-theme-btn"
+      class="global-theme-btn no-print"
+      onclick="toggleTheme(event)"
+      title="Switch Light / Dark Mode"
+      aria-label="Toggle theme"
+      type="button">
+        <span class="theme-icon-dark">🌙</span>
+        <span class="theme-icon-light" style="display:none;">☀️</span>
+    </button>
 
     <!-- Scripts -->
     <script src="/static/js/main.js?v=3.0"></script>
