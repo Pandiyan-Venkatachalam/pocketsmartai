@@ -35,7 +35,19 @@ function closeSidebar(e) {
 
 function toggleSidebar(forceOpen, e) {
     if (e && e.preventDefault) { e.preventDefault(); e.stopPropagation(); }
-    const isClosed = document.body.classList.contains("sidebar-closed") || 
+    const sidebar = document.getElementById("sidebar");
+    // On mobile: use .open class to determine state
+    if (isMobileView()) {
+        const isOpen = sidebar && sidebar.classList.contains("open");
+        if (isOpen) {
+            closeSidebar(e);
+        } else {
+            openSidebar(e);
+        }
+        return;
+    }
+    // Desktop: use sidebar-closed class
+    const isClosed = document.body.classList.contains("sidebar-closed") ||
                      document.documentElement.classList.contains("sidebar-closed");
     if (forceOpen === true || isClosed) {
         openSidebar(e);

@@ -4,57 +4,88 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}PocketSmart AI — Smart Budget & Recommendation Assistant{% endblock %}</title>
-    <link rel="stylesheet" href="/static/css/style.css?v=4.2">
+    <link rel="stylesheet" href="/static/css/style.css?v=4.3">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <script>
-        // Theme initialization to prevent layout flash
-        var savedTheme = localStorage.getItem('ps_theme') || 'dark';
-        if (savedTheme === 'light') {
-            document.documentElement.setAttribute('data-theme', 'light');
-        }
+        /* ── Multi-Theme System ─────────────────────────────── */
+        var PS_THEMES = ['dark', 'light', 'ocean', 'forest', 'sunset', 'violet'];
+        var PS_THEME_ICONS = {
+            dark:   '🌙',
+            light:  '☀️',
+            ocean:  '🌊',
+            forest: '🌿',
+            sunset: '🌅',
+            violet: '💜'
+        };
 
-        function toggleTheme(e) {
+        // Restore saved theme before render (prevents flash)
+        var savedTheme = localStorage.getItem('ps_theme') || 'dark';
+        if (PS_THEMES.indexOf(savedTheme) === -1) savedTheme = 'dark';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+
+        function cycleTheme(e) {
             if (e && e.preventDefault) { e.preventDefault(); e.stopPropagation(); }
             var current = document.documentElement.getAttribute('data-theme') || 'dark';
-            var next = current === 'dark' ? 'light' : 'dark';
-            document.documentElement.setAttribute('data-theme', next);
-            try { localStorage.setItem('ps_theme', next); } catch(err){}
-            updateThemeIcons(next);
+            var idx = PS_THEMES.indexOf(current);
+            var next = PS_THEMES[(idx + 1) % PS_THEMES.length];
+            applyTheme(next);
+        }
+
+        // Keep old toggleTheme name for compatibility but map to cycleTheme
+        function toggleTheme(e) { cycleTheme(e); }
+
+        function applyTheme(theme) {
+            if (PS_THEMES.indexOf(theme) === -1) theme = 'dark';
+            document.documentElement.setAttribute('data-theme', theme);
+            try { localStorage.setItem('ps_theme', theme); } catch(err){}
+            updateThemeIcons(theme);
         }
 
         function updateThemeIcons(theme) {
-            document.querySelectorAll('.theme-icon-dark').forEach(function(el){ el.style.display = theme === 'light' ? 'none' : 'inline'; });
-            document.querySelectorAll('.theme-icon-light').forEach(function(el){ el.style.display = theme === 'light' ? 'inline' : 'none'; });
+            var icon = PS_THEME_ICONS[theme] || '🌙';
+            document.querySelectorAll('.theme-cycle-icon').forEach(function(el){
+                el.textContent = icon;
+            });
+            // legacy compat
+            document.querySelectorAll('.theme-icon-dark').forEach(function(el){ el.style.display = (theme === 'light') ? 'none' : 'inline'; });
+            document.querySelectorAll('.theme-icon-light').forEach(function(el){ el.style.display = (theme === 'light') ? 'inline' : 'none'; });
         }
 
         document.addEventListener('DOMContentLoaded', function() {
-            updateThemeIcons(document.documentElement.getAttribute('data-theme') || 'dark');
+            var current = document.documentElement.getAttribute('data-theme') || 'dark';
+            updateThemeIcons(current);
         });
 
-        // Check saved sidebar preference before rendering to prevent layout pop
+        /* ── Sidebar ─────────────────────────────────────────── */
+        // On desktop only: restore closed state
         if (localStorage.getItem('ps_sidebar_closed') === 'true' && window.innerWidth > 900) {
             document.documentElement.classList.add('sidebar-closed');
         }
 
-        // Global sidebar open/close
         function closeSidebar(e) {
             if (e && e.preventDefault) { e.preventDefault(); e.stopPropagation(); }
-            document.body.classList.add('sidebar-closed');
-            document.documentElement.classList.add('sidebar-closed');
             var sidebar = document.getElementById('sidebar');
             var overlay = document.getElementById('sidebar-overlay');
-            if (sidebar) sidebar.classList.remove('open');
-            if (overlay) overlay.classList.remove('active');
-            try { localStorage.setItem('ps_sidebar_closed', 'true'); } catch(err){}
+            // On mobile: just slide sidebar out (don't set sidebar-closed class)
+            if (window.innerWidth <= 900) {
+                if (sidebar) sidebar.classList.remove('open');
+                if (overlay) overlay.classList.remove('active');
+            } else {
+                document.body.classList.add('sidebar-closed');
+                document.documentElement.classList.add('sidebar-closed');
+                if (sidebar) sidebar.classList.remove('open');
+                if (overlay) overlay.classList.remove('active');
+                try { localStorage.setItem('ps_sidebar_closed', 'true'); } catch(err){}
+            }
         }
 
         function openSidebar(e) {
             if (e && e.preventDefault) { e.preventDefault(); e.stopPropagation(); }
-            document.body.classList.remove('sidebar-closed');
-            document.documentElement.classList.remove('sidebar-closed');
             var sidebar = document.getElementById('sidebar');
             var overlay = document.getElementById('sidebar-overlay');
+            document.body.classList.remove('sidebar-closed');
+            document.documentElement.classList.remove('sidebar-closed');
             if (window.innerWidth <= 900) {
                 if (sidebar) sidebar.classList.add('open');
                 if (overlay) overlay.classList.add('active');
@@ -64,7 +95,19 @@
 
         function toggleSidebar(forceOpen, e) {
             if (e && e.preventDefault) { e.preventDefault(); e.stopPropagation(); }
-            var isClosed = document.body.classList.contains('sidebar-closed') || 
+            var sidebar = document.getElementById('sidebar');
+            // On mobile: use .open class to determine open state
+            if (window.innerWidth <= 900) {
+                var isOpen = sidebar && sidebar.classList.contains('open');
+                if (isOpen) {
+                    closeSidebar(e);
+                } else {
+                    openSidebar(e);
+                }
+                return;
+            }
+            // Desktop: use sidebar-closed class
+            var isClosed = document.body.classList.contains('sidebar-closed') ||
                            document.documentElement.classList.contains('sidebar-closed');
             if (forceOpen === true || isClosed) {
                 openSidebar(e);
@@ -73,10 +116,8 @@
             }
         }
 
-        // Universal card click handler
         function handleCardClick(e, url, target) {
             if (!url) return;
-            // Don't intercept clicks on links, buttons, inputs, icons
             if (e && e.target && e.target.closest && e.target.closest('a, button, input, select, textarea, .icon-btn, .delete-history-btn, .sidebar-toggle-btn')) {
                 return;
             }
@@ -254,20 +295,19 @@
     </div>
 
 
-    <!-- ── Fixed top-right theme toggle ── -->
+    <!-- ── Fixed top-right multi-theme toggle ── -->
     <button
       id="global-theme-btn"
       class="global-theme-btn no-print"
-      onclick="toggleTheme(event)"
-      title="Switch Light / Dark Mode"
-      aria-label="Toggle theme"
+      onclick="cycleTheme(event)"
+      title="Cycle Themes: Dark → Light → Ocean → Forest → Sunset → Violet"
+      aria-label="Cycle theme"
       type="button">
-        <span class="theme-icon-dark">🌙</span>
-        <span class="theme-icon-light" style="display:none;">☀️</span>
+        <span class="theme-cycle-icon">🌙</span>
     </button>
 
     <!-- Scripts -->
-    <script src="/static/js/main.js?v=3.0"></script>
+    <script src="/static/js/main.js?v=3.1"></script>
     {% block scripts %}{% endblock %}
 </body>
 </html>

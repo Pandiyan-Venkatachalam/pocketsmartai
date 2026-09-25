@@ -1838,6 +1838,247 @@ textarea.form-control { min-height: 90px; resize: vertical; }
 }
 
 /* ==========================================================================
+   MULTI-THEME PALETTE SYSTEM
+   Themes: dark (default), light, ocean, forest, sunset, violet
+   ========================================================================== */
+
+/* ── Ocean Theme ────────────────────────────────────────── */
+[data-theme="ocean"] {
+  --bg-primary:       #0a1628;
+  --bg-secondary:     #0d1f38;
+  --bg-surface:       #112244;
+  --bg-surface-hover: #163052;
+  --bg-input:         #0d1f38;
+  --bg-deep:          #071020;
+
+  --border-subtle:    rgba(0, 180, 255, 0.15);
+  --border-active:    rgba(0, 180, 255, 0.4);
+  --border-focus:     #00b4ff;
+
+  --text-pure:        #e8f4ff;
+  --text-main:        #c8dff5;
+  --text-muted:       #7aadcc;
+  --text-dim:         #4a7a9b;
+
+  --primary:          #00b4ff;
+  --primary-light:    #44ccff;
+  --gradient-brand:   linear-gradient(135deg, #0066cc, #00b4ff);
+}
+[data-theme="ocean"] body {
+  background: var(--bg-primary);
+  color: var(--text-main);
+}
+[data-theme="ocean"] .sidebar {
+  background: linear-gradient(180deg, #0d1f38 0%, #071828 100%);
+  border-right: 1px solid rgba(0,180,255,0.12);
+}
+[data-theme="ocean"] .card,
+[data-theme="ocean"] .rec-item-card,
+[data-theme="ocean"] .budget-summary-banner,
+[data-theme="ocean"] .domain-breakdown-card,
+[data-theme="ocean"] .stat-card,
+[data-theme="ocean"] .plan-card-sm {
+  background: var(--bg-surface);
+  border-color: var(--border-subtle);
+}
+[data-theme="ocean"] .sidebar-link { color: var(--text-muted); }
+[data-theme="ocean"] .sidebar-link:hover,
+[data-theme="ocean"] .sidebar-link.active {
+  background: rgba(0,180,255,0.12);
+  color: var(--primary-light);
+}
+[data-theme="ocean"] .global-theme-btn {
+  background: rgba(0,30,60,0.9);
+  border-color: rgba(0,180,255,0.4);
+  color: #44ccff;
+}
+[data-theme="ocean"] .mobile-topbar {
+  background: rgba(10,22,40,0.95);
+  border-bottom: 1px solid rgba(0,180,255,0.12);
+}
+[data-theme="ocean"] .footer {
+  border-top: 1px solid rgba(0,180,255,0.1);
+  background: var(--bg-secondary);
+}
+
+/* ── Forest Theme ───────────────────────────────────────── */
+[data-theme="forest"] {
+  --bg-primary:       #0a1a0f;
+  --bg-secondary:     #0f2218;
+  --bg-surface:       #132a1c;
+  --bg-surface-hover: #1a3825;
+  --bg-input:         #0f2218;
+  --bg-deep:          #071208;
+
+  --border-subtle:    rgba(34, 197, 94, 0.14);
+  --border-active:    rgba(34, 197, 94, 0.4);
+  --border-focus:     #22c55e;
+
+  --text-pure:        #ecfdf5;
+  --text-main:        #bbf7d0;
+  --text-muted:       #6dbd8a;
+  --text-dim:         #3d8a56;
+
+  --primary:          #22c55e;
+  --primary-light:    #4ade80;
+  --gradient-brand:   linear-gradient(135deg, #16a34a, #22c55e);
+}
+[data-theme="forest"] body {
+  background: var(--bg-primary);
+  color: var(--text-main);
+}
+[data-theme="forest"] .sidebar {
+  background: linear-gradient(180deg, #0f2218 0%, #071208 100%);
+  border-right: 1px solid rgba(34,197,94,0.12);
+}
+[data-theme="forest"] .card,
+[data-theme="forest"] .rec-item-card,
+[data-theme="forest"] .budget-summary-banner,
+[data-theme="forest"] .domain-breakdown-card,
+[data-theme="forest"] .stat-card,
+[data-theme="forest"] .plan-card-sm {
+  background: var(--bg-surface);
+  border-color: var(--border-subtle);
+}
+[data-theme="forest"] .sidebar-link { color: var(--text-muted); }
+[data-theme="forest"] .sidebar-link:hover,
+[data-theme="forest"] .sidebar-link.active {
+  background: rgba(34,197,94,0.12);
+  color: var(--primary-light);
+}
+[data-theme="forest"] .global-theme-btn {
+  background: rgba(7,18,8,0.9);
+  border-color: rgba(34,197,94,0.4);
+  color: #4ade80;
+}
+[data-theme="forest"] .mobile-topbar {
+  background: rgba(10,26,15,0.95);
+  border-bottom: 1px solid rgba(34,197,94,0.12);
+}
+[data-theme="forest"] .footer {
+  border-top: 1px solid rgba(34,197,94,0.1);
+  background: var(--bg-secondary);
+}
+
+/* ── Sunset Theme ───────────────────────────────────────── */
+[data-theme="sunset"] {
+  --bg-primary:       #1a0a05;
+  --bg-secondary:     #2a1208;
+  --bg-surface:       #341808;
+  --bg-surface-hover: #422010;
+  --bg-input:         #2a1208;
+  --bg-deep:          #0f0603;
+
+  --border-subtle:    rgba(251, 146, 60, 0.15);
+  --border-active:    rgba(251, 146, 60, 0.45);
+  --border-focus:     #fb923c;
+
+  --text-pure:        #fff7ed;
+  --text-main:        #fed7aa;
+  --text-muted:       #c26d3a;
+  --text-dim:         #8a4525;
+
+  --primary:          #fb923c;
+  --primary-light:    #fdba74;
+  --gradient-brand:   linear-gradient(135deg, #ea580c, #fb923c, #fbbf24);
+}
+[data-theme="sunset"] body {
+  background: var(--bg-primary);
+  color: var(--text-main);
+}
+[data-theme="sunset"] .sidebar {
+  background: linear-gradient(180deg, #2a1208 0%, #0f0603 100%);
+  border-right: 1px solid rgba(251,146,60,0.12);
+}
+[data-theme="sunset"] .card,
+[data-theme="sunset"] .rec-item-card,
+[data-theme="sunset"] .budget-summary-banner,
+[data-theme="sunset"] .domain-breakdown-card,
+[data-theme="sunset"] .stat-card,
+[data-theme="sunset"] .plan-card-sm {
+  background: var(--bg-surface);
+  border-color: var(--border-subtle);
+}
+[data-theme="sunset"] .sidebar-link { color: var(--text-muted); }
+[data-theme="sunset"] .sidebar-link:hover,
+[data-theme="sunset"] .sidebar-link.active {
+  background: rgba(251,146,60,0.12);
+  color: var(--primary-light);
+}
+[data-theme="sunset"] .global-theme-btn {
+  background: rgba(15,6,3,0.9);
+  border-color: rgba(251,146,60,0.4);
+  color: #fdba74;
+}
+[data-theme="sunset"] .mobile-topbar {
+  background: rgba(26,10,5,0.95);
+  border-bottom: 1px solid rgba(251,146,60,0.12);
+}
+[data-theme="sunset"] .footer {
+  border-top: 1px solid rgba(251,146,60,0.1);
+  background: var(--bg-secondary);
+}
+
+/* ── Violet Theme ───────────────────────────────────────── */
+[data-theme="violet"] {
+  --bg-primary:       #0d0a1a;
+  --bg-secondary:     #130f26;
+  --bg-surface:       #1a1535;
+  --bg-surface-hover: #221c44;
+  --bg-input:         #130f26;
+  --bg-deep:          #07050f;
+
+  --border-subtle:    rgba(139, 92, 246, 0.15);
+  --border-active:    rgba(139, 92, 246, 0.45);
+  --border-focus:     #8b5cf6;
+
+  --text-pure:        #f5f3ff;
+  --text-main:        #ddd6fe;
+  --text-muted:       #9d84d4;
+  --text-dim:         #5c4b90;
+
+  --primary:          #8b5cf6;
+  --primary-light:    #a78bfa;
+  --gradient-brand:   linear-gradient(135deg, #7c3aed, #8b5cf6, #c084fc);
+}
+[data-theme="violet"] body {
+  background: var(--bg-primary);
+  color: var(--text-main);
+}
+[data-theme="violet"] .sidebar {
+  background: linear-gradient(180deg, #130f26 0%, #07050f 100%);
+  border-right: 1px solid rgba(139,92,246,0.12);
+}
+[data-theme="violet"] .card,
+[data-theme="violet"] .rec-item-card,
+[data-theme="violet"] .budget-summary-banner,
+[data-theme="violet"] .domain-breakdown-card,
+[data-theme="violet"] .stat-card,
+[data-theme="violet"] .plan-card-sm {
+  background: var(--bg-surface);
+  border-color: var(--border-subtle);
+}
+[data-theme="violet"] .sidebar-link { color: var(--text-muted); }
+[data-theme="violet"] .sidebar-link:hover,
+[data-theme="violet"] .sidebar-link.active {
+  background: rgba(139,92,246,0.12);
+  color: var(--primary-light);
+}
+[data-theme="violet"] .global-theme-btn {
+  background: rgba(7,5,15,0.9);
+  border-color: rgba(139,92,246,0.4);
+  color: #a78bfa;
+}
+[data-theme="violet"] .mobile-topbar {
+  background: rgba(13,10,26,0.95);
+  border-bottom: 1px solid rgba(139,92,246,0.12);
+}
+[data-theme="violet"] .footer {
+  border-top: 1px solid rgba(139,92,246,0.1);
+  background: var(--bg-secondary);
+}
+
+/* ==========================================================================
    PRINT / PDF EXPORT STYLES — clean, ink-friendly, proper content only
    ========================================================================== */
 .print-only { display: none; }
