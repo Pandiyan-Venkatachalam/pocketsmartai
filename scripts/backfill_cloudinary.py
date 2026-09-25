@@ -1,4 +1,4 @@
-﻿import sqlite3
+import sqlite3
 import cloudinary
 import cloudinary.uploader
 import requests

@@ -21,8 +21,11 @@ logger = logging.getLogger("pocketsmart")
 async def lifespan(app: FastAPI):
     """Application startup and shutdown events."""
     logger.info("Starting PocketSmart AI server...")
-    init_db()
-    logger.info("Database initialized.")
+    try:
+        init_db()
+        logger.info("Database initialized.")
+    except Exception as e:
+        logger.error(f"Database initialization warning: {e}")
     yield
     logger.info("Shutting down PocketSmart AI server...")
 

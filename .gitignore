@@ -48,3 +48,5 @@ htmlcov/
 *.log
 
 .vercel
+
+*.zip
